@@ -8,7 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +18,7 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date data;
+    private LocalDateTime data;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
@@ -30,7 +30,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Integer id, Date data, Cliente cliente) {
+    public Pedido(Integer id, LocalDateTime data, Cliente cliente) {
         this.id = id;
         this.data = data;
         this.cliente = cliente;
@@ -44,11 +44,11 @@ public class Pedido {
         this.id = id;
     }
 
-    public Date getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 
