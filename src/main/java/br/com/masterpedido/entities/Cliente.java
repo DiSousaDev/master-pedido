@@ -1,5 +1,8 @@
 package br.com.masterpedido.entities;
 
+import br.com.masterpedido.dto.cliente.ClienteFullDTO;
+import br.com.masterpedido.dto.cliente.ClienteRequest;
+import br.com.masterpedido.dto.cliente.ClienteUpdateRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,16 +29,28 @@ public class Cliente {
     @Column(columnDefinition = "VARCHAR(50)")
     private String sobrenome;
     @OneToMany(mappedBy = "cliente")
-    private List<Pedido> pedidos = new ArrayList<>();
+    private final List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
     }
 
-    public Cliente(Integer id, String cpf, String nome, String sobrenome) {
+    public Cliente(ClienteFullDTO clienteFullDTO) {
+        cpf = clienteFullDTO.cpf();
+        nome = clienteFullDTO.nome();
+        sobrenome = clienteFullDTO.sobrenome();
+    }
+
+    public Cliente(ClienteRequest clienteRequest) {
+        cpf = clienteRequest.cpf();
+        nome = clienteRequest.nome();
+        sobrenome = clienteRequest.sobrenome();
+    }
+
+    public Cliente(Integer id, ClienteUpdateRequest clienteUpdateRequest) {
         this.id = id;
-        this.cpf = cpf;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
+        cpf = clienteUpdateRequest.cpf();
+        nome = clienteUpdateRequest.nome();
+        sobrenome = clienteUpdateRequest.sobrenome();
     }
 
     public Integer getId() {
@@ -73,4 +88,5 @@ public class Cliente {
     public List<Pedido> getPedidos() {
         return pedidos;
     }
+
 }
