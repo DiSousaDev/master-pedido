@@ -1,0 +1,16 @@
+# Dados de conexão com o banco H2
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DATABASE_TO_UPPER=FALSE
+    username: sa
+    password:
+  # Configuração do cliente web do banco H2
+  h2:
+    console:
+      enabled: true
+  # Configuração para mostrar o SQL no console
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
