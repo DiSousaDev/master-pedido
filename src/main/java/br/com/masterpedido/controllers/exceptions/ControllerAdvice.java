@@ -1,6 +1,7 @@
 package br.com.masterpedido.controllers.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.JDBCException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,13 @@ public class ControllerAdvice {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ProblemDetail> handleEntityNotFoundException(EntityNotFoundException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, ex.getMessage());
+        return ResponseEntity.status(status.value()).body(problemDetail);
+    }
+
+    @ExceptionHandler(JDBCException.class)
+    public ResponseEntity<ProblemDetail> handleEntityNotFoundException(JDBCException ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, ex.getMessage());
         return ResponseEntity.status(status.value()).body(problemDetail);
     }

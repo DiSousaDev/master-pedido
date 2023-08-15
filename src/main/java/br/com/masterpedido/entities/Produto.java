@@ -1,5 +1,8 @@
 package br.com.masterpedido.entities;
 
+import br.com.masterpedido.dto.produto.ProdutoFullDTO;
+import br.com.masterpedido.dto.produto.ProdutoRequest;
+import br.com.masterpedido.dto.produto.ProdutoUpdateRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,14 +24,23 @@ public class Produto {
     private String descricao;
 
     @OneToMany(mappedBy = "id.produto")
-    private Set<ItemDoPedido> itens = new HashSet<>();
+    private final Set<ItemDoPedido> itens = new HashSet<>();
 
     public Produto() {
     }
 
-    public Produto(Integer id, String descricao) {
+    public Produto(ProdutoFullDTO produtoFullDTO) {
+        id = produtoFullDTO.id();
+        descricao = produtoFullDTO.descricao();
+    }
+
+    public Produto(ProdutoRequest request) {
+        descricao = request.descricao();
+    }
+
+    public Produto(Integer id, ProdutoUpdateRequest request) {
         this.id = id;
-        this.descricao = descricao;
+        descricao = request.descricao();
     }
 
     public Integer getId() {
