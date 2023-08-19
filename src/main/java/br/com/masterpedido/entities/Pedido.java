@@ -8,12 +8,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Pedido {
+public class Pedido implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,7 @@ public class Pedido {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "id.pedido")
-    private Set<ItemDoPedido> itens = new HashSet<>();
+    private final Set<ItemDoPedido> itens = new HashSet<>();
 
     public Pedido() {
     }
