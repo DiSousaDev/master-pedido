@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public record PedidoFullDTO(
 
-        Integer id,
+        Integer idPedido,
         LocalDateTime data,
         ClienteFullDTO cliente,
         Set<ItemPedidoDTO> itens

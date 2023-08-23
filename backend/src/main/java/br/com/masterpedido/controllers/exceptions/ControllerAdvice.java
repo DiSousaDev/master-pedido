@@ -23,6 +23,20 @@ public class ControllerAdvice {
         return ResponseEntity.status(status.value()).body(problemDetail);
     }
 
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<ProblemDetail> handleDatabaseException(DatabaseException ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, ex.getMessage());
+        return ResponseEntity.status(status.value()).body(problemDetail);
+    }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<ProblemDetail> handleDataNotFoundException(DataNotFoundException ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, ex.getMessage());
+        return ResponseEntity.status(status.value()).body(problemDetail);
+    }
+
     @ExceptionHandler(JDBCException.class)
     public ResponseEntity<ProblemDetail> handleEntityNotFoundException(JDBCException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;

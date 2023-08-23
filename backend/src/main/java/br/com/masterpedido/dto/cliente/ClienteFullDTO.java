@@ -3,7 +3,7 @@ package br.com.masterpedido.dto.cliente;
 import br.com.masterpedido.entities.Cliente;
 
 public record ClienteFullDTO(
-        Integer id,
+        Integer idCliente,
         String cpf,
         String nome,
         String sobrenome

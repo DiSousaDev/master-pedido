@@ -10,6 +10,8 @@ public interface ClienteService {
 
     ClienteFullDTO buscarPorId(Integer id);
 
+    ClienteFullDTO buscarPorCpf(String cpf);
+
     Page<ClienteFullDTO> listarTodos(Pageable pageable);
 
     ClienteFullDTO salvar(ClienteRequest clienteRequest);

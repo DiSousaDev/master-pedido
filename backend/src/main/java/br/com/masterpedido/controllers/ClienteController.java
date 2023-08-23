@@ -49,11 +49,16 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.buscarPorId(id));
     }
 
+    @GetMapping(value = "busca-cpf/{cpf}")
+    public ResponseEntity<ClienteFullDTO> buscarPorCpf(@PathVariable String cpf) {
+        return ResponseEntity.ok(clienteService.buscarPorCpf(cpf));
+    }
+
     @PostMapping
     public ResponseEntity<ClienteFullDTO> cadastrar(@RequestBody @Valid ClienteRequest request) {
         ClienteFullDTO obj = clienteService.salvar(request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(obj.id()).toUri();
+                .buildAndExpand(obj.idCliente()).toUri();
         log.info("Cliente {} cadastrado com sucesso.", obj);
         return ResponseEntity.created(uri).body(obj);
     }
