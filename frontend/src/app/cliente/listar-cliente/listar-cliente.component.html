@@ -1,1 +1,111 @@
-<h2>Listar Cliente</h2>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
+		<li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+		<li class="breadcrumb-item"><a [routerLink]="['/cliente']" href="#">Cliente</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Listar cliente</li>
+	</ol>
+</nav>
+<div class="conteiner-fluid">
+	<div class="row">
+		<div class="col-6">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Pesquisar cliente" aria-label="Pesquisar cliente" aria-describedby="btnPesquisarCliente">
+				<button class="btn btn-primary" type="button" id="btnPesquisarCliente"><i class="fa fa-search" aria-hidden="true"></i></button>
+			</div>	
+		</div>
+		<div class="col-6 d-flex flex-row-reverse">
+			<a [routerLink]="['./inserir-cliente']" href="#" title="Novo" alt="Novo" class="btn btn-primary rounded-pill">
+				<i class="fa fa-plus" aria-hidden="true"></i> NOVO
+			</a>
+		</div>
+	</div>
+</div>
+<br/>
+<div class="conteiner-fluid">	
+	<table class="table table-striped table-bordered table-hover">
+		<tbody>
+			<tr>
+				<th>Nome</th>
+				<th>Sobrenome</th>
+				<th>CPF</th>
+				<th class="text-center" colspan="2">Ações</th>
+			</tr>
+			<tr>
+				<td>Luís</td>
+				<td>Benício Moraes</td>
+				<td>669.844.269-0</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+						<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
+					</a>
+				</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
+						<i class="fa fa-times" aria-hidden="true"></i> REMOVER
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Olivia</td>
+				<td>Brenda da Rocha</td>
+				<td>559.464.197-14</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+						<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
+					</a>
+				</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
+						<i class="fa fa-times" aria-hidden="true"></i> REMOVER
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Luzia</td>
+				<td>Stella Lívia Jesus</td>
+				<td>129.542.062-76</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+						<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
+					</a>
+				</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
+						<i class="fa fa-times" aria-hidden="true"></i> REMOVER
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Victor</td>
+				<td>Heitor Iago Vieira</td>
+				<td>435.183.204-59</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+						<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
+					</a>
+				</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
+						<i class="fa fa-times" aria-hidden="true"></i> REMOVER
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Tânia</td>
+				<td>Rosângela Moreira</td>
+				<td>911.042.301-00</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+						<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
+					</a>
+				</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
+						<i class="fa fa-times" aria-hidden="true"></i> REMOVER
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Nenhum cliente cadastrado.</p>
+</div>

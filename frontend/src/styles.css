@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+.btn {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.075rem;
+}
