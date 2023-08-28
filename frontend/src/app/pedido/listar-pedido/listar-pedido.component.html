@@ -6,7 +6,8 @@
 	</ol>
 </nav>
 <div class="conteiner-fluid">
-	<h3>Pesquisar pedido do cliente</h3>
+	<h4>Pesquisar pedido do cliente</h4>
+	<br/>
 	<div class="row">
 		<div class="col-6">
 			<div class="input-group">
@@ -20,7 +21,8 @@
 			</a>
 		</div>
 	</div>
-	<h4>(Id do Cliente) Nome do Cliente</h4>
+	<br/>
+	<h5>((cliente.id)) - ((cliente.nome))</h5>
 </div>
 <br/>
 <div class="conteiner-fluid">	
@@ -32,6 +34,15 @@
 				<th></th>
 			</tr>
 			<tr>
+				<td>((pedido.id))</td>
+				<td>((pedido.data))</td>
+				<td class="text-center" style="width: 180px">
+					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+						<i class="fa-regular fa-file-lines" aria-hidden="true"></i> VER PEDIDO
+					</a>
+				</td>
+			</tr>									
+			<tr>
 				<td>1</td>
 				<td>09/11/2023 - 12h53</td>
 				<td class="text-center" style="width: 180px">
@@ -40,33 +51,6 @@
 					</a>
 				</td>
 			</tr>
-			<tr>
-				<td>2</td>
-				<td>23</td>
-				<td class="text-center" style="width: 180px">
-					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
-						<i class="fa-regular fa-file-lines" aria-hidden="true"></i> VER PEDIDO
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>11</td>
-				<td class="text-center" style="width: 180px">
-					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
-						<i class="fa-regular fa-file-lines" aria-hidden="true"></i> VER PEDIDO
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>13</td>
-				<td class="text-center" style="width: 180px">
-					<a href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
-						<i class="fa-regular fa-file-lines" aria-hidden="true"></i> VER PEDIDO
-					</a>
-				</td>
-			</tr>									
 		</tbody>
 	</table>
 	<p>Nenhum pedido cadastrado.</p>
