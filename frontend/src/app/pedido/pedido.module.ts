@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { InserirPedidoComponent } from './inserir-pedido/inserir-pedido.component';
-import { ListarPedidoComponent } from './listar-pedido/listar-pedido.component';
+import { PesquisarPedidoComponent } from './pesquisar-pedido/pesquisar-pedido.component';
 import { VisualizarPedidoComponent } from './visualizar-pedido/visualizar-pedido.component';
 
 @NgModule({
   declarations: [
     InserirPedidoComponent,
-    ListarPedidoComponent,
+    PesquisarPedidoComponent,
     VisualizarPedidoComponent
   ],
   imports: [
