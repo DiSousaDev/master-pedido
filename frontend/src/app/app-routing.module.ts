@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { InserirClienteComponent, EditarClienteComponent, ListarClienteComponent } from './cliente';
-import { InserirPedidoComponent, PesquisarPedidoComponent, VisualizarPedidoComponent, } from './pedido';
+import { InserirPedidoComponent, PesquisarPedidoComponent } from './pedido';
 import { ListarProdutoComponent } from './produto';
 
 const routes: Routes = [
@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: 'cliente/listar', component: ListarClienteComponent },  
 
   { path: 'pedido', redirectTo: 'pedido/pesquisar' },
-  { path: 'pedido/editar', component: VisualizarPedidoComponent },
   { path: 'pedido/inserir', component: InserirPedidoComponent },
   { path: 'pedido/pesquisar', component: PesquisarPedidoComponent },
 
