@@ -5,7 +5,7 @@
 		<li class="breadcrumb-item active" aria-current="page">Listar cliente</li>
 	</ol>
 </nav>
-<div class="conteiner-fluid">
+<div class="conteiner">
 	<div class="row">
 		<div class="col-6">
 			<div class="input-group">
@@ -19,48 +19,48 @@
 			</a>
 		</div>
 	</div>
-</div>
-<br/>
-<div class="conteiner-fluid">	
-	<table class="table table-striped table-bordered table-hover">
-		<tbody>
-			<tr>
-				<th>Nome</th>
-				<th>Sobrenome</th>
-				<th>CPF</th>
-				<th class="text-center" colspan="2">Ações</th>
-			</tr>
-			<tr>
-				<td>Luís</td>
-				<td>Benício Moraes</td>
-				<td>669.844.269-0</td>
-				<td class="text-center" style="width: 180px">
-					<a [routerLink]="['/cliente/editar']" href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
-						<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
-					</a>
-				</td>
-				<td class="text-center" style="width: 180px">
-					<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
-						<i class="fa fa-times" aria-hidden="true"></i> REMOVER
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>((cliente.nome))</td>
-				<td>((cliente.sobrenome))</td>
-				<td>((cliente.cpf))</td>
-				<td class="text-center" style="width: 180px">
-					<a [routerLink]="['/cliente/editar']" href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
-						<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
-					</a>
-				</td>
-				<td class="text-center" style="width: 180px">
-					<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
-						<i class="fa fa-times" aria-hidden="true"></i> REMOVER
-					</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<p>Nenhum cliente cadastrado.</p>
+	<br/>
+	<div class="row">	
+		<table class="table table-striped table-bordered table-hover">
+			<tbody>
+				<tr>
+					<th>Nome</th>
+					<th>Sobrenome</th>
+					<th>CPF</th>
+					<th class="text-center" colspan="2">Ações</th>
+				</tr>
+				<tr>
+					<td>((cliente.nome))</td>
+					<td>((cliente.sobrenome))</td>
+					<td>((cliente.cpf))</td>
+					<td class="text-center" style="width: 180px">
+						<a [routerLink]="['/cliente/editar']" href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+							<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
+						</a>
+					</td>
+					<td class="text-center" style="width: 180px">
+						<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
+							<i class="fa fa-times" aria-hidden="true"></i> REMOVER
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>Luís</td>
+					<td>Benício Moraes</td>
+					<td>669.844.269-0</td>
+					<td class="text-center" style="width: 180px">
+						<a [routerLink]="['/cliente/editar']" href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+							<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
+						</a>
+					</td>
+					<td class="text-center" style="width: 180px">
+						<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
+							<i class="fa fa-times" aria-hidden="true"></i> REMOVER
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>Nenhum cliente cadastrado.</p>
+	</div>
 </div>
