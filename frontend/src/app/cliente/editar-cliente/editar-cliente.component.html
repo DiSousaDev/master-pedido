@@ -1,5 +1,10 @@
-<h4>Editar Cliente</h4>
-
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
+		<li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+		<li class="breadcrumb-item"><a [routerLink]="['/cliente']" href="#">Cliente</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Editar cliente</li>
+	</ol>
+</nav>
 <form>
 	<div class="conteiner">
 		<div class="row">
@@ -32,7 +37,7 @@
 		</div>
 		<div class="row">
 			<div class="form-group">
-				<a class="btn btn-secondary rounded-pill">
+				<a [routerLink]="['/cliente']" class="btn btn-secondary rounded-pill">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
 				</a>
 				&nbsp;		
