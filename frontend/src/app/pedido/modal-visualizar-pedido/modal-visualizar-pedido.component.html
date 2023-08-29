@@ -1,0 +1,32 @@
+<div class="modal-header">
+	<h4 class="modal-title" id="modalLabel">Pedido nº ((pedido.id))</h4>
+	<button type="button" class="close" aria-label="FECHAR" (click)="activeModal.dismiss()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<div>
+		<p>Nome: (( pessoa.nome )) </p>
+		<p>Sobrenome: (( pessoa.sobrenome ))</p>
+		<p>CPF: (( pessoa.cpf)) </p>
+	</div>
+	<table class="table table-striped table-bordered table-hover">
+		<tbody>
+			<tr>
+				<th>Produto</th>
+				<th>Quantidade</th>
+			</tr>
+			<tr>
+				<td>((produto.descricao))</td>
+				<td>((produto.quantidade))</td>
+			</tr>									
+			<tr>
+				<td>Bloco de anotações sem pauta Spiral</td>
+				<td>4</td>
+			</tr>
+		</tbody>
+	</table>	
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-dark rounded-pill" (click)="activeModal.close()">FECHAR</button>
+</div>
