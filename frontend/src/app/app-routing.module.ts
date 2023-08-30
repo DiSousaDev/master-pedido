@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { InserirClienteComponent, EditarClienteComponent, ListarClienteComponent } from './cliente';
 import { InserirPedidoComponent, PesquisarPedidoComponent } from './pedido';
-import { ListarProdutoComponent } from './produto';
+import { ListarProdutoComponent, EditarProdutoComponent,InserirProdutoComponent } from './produto';
 
 const routes: Routes = [
   { path: '', redirectTo: 'cliente/listar', pathMatch: 'full' },
@@ -18,7 +18,9 @@ const routes: Routes = [
   { path: 'pedido/pesquisar', component: PesquisarPedidoComponent },
 
   { path: 'produto', redirectTo: 'produto/listar' },
-  { path: 'produto/listar', component: ListarProdutoComponent } 
+  { path: 'produto/listar', component: ListarProdutoComponent },
+  { path: 'produto/editar', component: EditarProdutoComponent },
+  { path: 'produto/inserir', component: InserirProdutoComponent },
 ];
 
 @NgModule({
