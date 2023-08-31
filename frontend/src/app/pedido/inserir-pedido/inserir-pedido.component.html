@@ -1,9 +1,63 @@
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
-		<li class="breadcrumb-item"><a routerLink="/" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-		<li class="breadcrumb-item"><a routerLink="/pedido" href="#">Pedido</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Inserir pedido</li>
+		<li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+		<li class="breadcrumb-item"><a [routerLink]="['/pedido']" href="#">Pedido</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Novo pedido</li>
 	</ol>
 </nav>
-<div class="conteiner-fluid">
-	<h4>Inserir pedido</h4>
+<div class="conteiner">
+	<h4>Novo Pedido</h4>
+	<br/>	
+	<form>
+		<div class="row">
+			<div class="form-group col-3">
+				<label for="nome">Nome cliente</label>
+				<input type="text" class="form-control" id="nome-cliente" name="nome-cliente" minlength="2" required> 
+				<div class="alert alert-danger mt-3">
+					<div> Digite um nome. </div>
+					<small> Para criar um pedido, digite o nome.</small>
+				</div>
+			</div>
+			<div class="form-group col-3">
+				<label for="sobrenome">Sobrenome</label>
+				<input type="text" class="form-control" id="sobrenome-cliente" name="sobrenome-cliente" minlength="2" required> 
+				<div class="alert alert-danger mt-3">
+					<div>Digite um sobrenome.</div>
+					<small>Para criar um pedido, digite o sobrenome.</small>
+				</div>
+			</div>
+			<div class="form-group col-3">
+				<label for="sobrenome">CPF</label>
+				<input type="text" class="form-control" id="cliente-cpf" name="cliente-cpf" minlength="2" required> 
+				<div class="alert alert-danger mt-3">
+					<div>Digite um CPF.</div>
+					<small>Para criar um pedido, digite o CPF.</small>
+				</div>
+			</div>
+			<div class="form-group col-3">
+				<label for="sobrenome">Produto</label>
+				<select class="form-select" aria-label="">
+					<option selected>Selecione</option>
+					<option value="1">Produto 1</option>
+					<option value="2">Produto 2</option>
+					<option value="3">Produto 3</option>
+				  </select>
+				<div class="alert alert-danger mt-3">
+					<div>Selecione um produto.</div>
+					<small>Para criar um pedido, selecione um produto.</small>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group">
+				<a [routerLink]="['/pedido']" class="btn btn-secondary rounded-pill">
+					<i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
+				</a>
+				&nbsp;		
+				<button type="button" class="btn btn-primary rounded-pill">
+					<i class="fa fa-save" aria-hidden="true"></i> SALVAR
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
