@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from "@angular/router";
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
-import { ListarProdutoComponent } from './listar-produto/listar-produto.component';
-import { InserirProdutoComponent } from './inserir-produto/inserir-produto.component';
-import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
+import { ListarProdutoComponent } from './listar-produto';
+import { InserirProdutoComponent } from './inserir-produto';
+import { EditarProdutoComponent } from './editar-produto';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { EditarProdutoComponent } from './editar-produto/editar-produto.componen
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ]
 })
 export class ProdutoModule { }
