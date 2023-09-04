@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'cliente', redirectTo: 'cliente/listar' },
   { path: 'cliente/editar', component: EditarClienteComponent },
   { path: 'cliente/inserir', component: InserirClienteComponent },
-  { path: 'cliente/listar', component: ListarClienteComponent },  
+  { path: 'cliente/listar', component: ListarClienteComponent },
 
   { path: 'pedido', redirectTo: 'pedido/pesquisar' },
   { path: 'pedido/inserir', component: InserirPedidoComponent },
@@ -19,7 +19,7 @@ const routes: Routes = [
 
   { path: 'produto', redirectTo: 'produto/listar' },
   { path: 'produto/listar', component: ListarProdutoComponent },
-  { path: 'produto/editar', component: EditarProdutoComponent },
+  { path: 'produto/editar/:id', component: EditarProdutoComponent },
   { path: 'produto/inserir', component: InserirProdutoComponent },
 ];
 

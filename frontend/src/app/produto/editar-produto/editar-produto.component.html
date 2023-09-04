@@ -5,38 +5,54 @@
 		<li class="breadcrumb-item active" aria-current="page">Editar produto</li>
 	</ol>
 </nav>
-<form>
-    <div class="conteiner">
-        <div class="row">
-            <div class="form-group col-4">
-                <label for="nome">Código</label>
-                <input type="text" class="form-control" id="codigo" name="codigo" minlength="2" required> 
-                <br/>
-                <div class="alert alert-danger">
-                    <div> Digite o código do produto. </div>
-                    <small> O código deve conter ao menos 6 caracteres.</small>
-                </div>
-            </div>
-            <div class="form-group col-4">
-                <label for="sobrenome">Descrição produto</label>
-                <input type="text" class="form-control" id="descricao" name="descricao" minlength="2" required> 
-                <br/>
-                <div class="alert alert-danger">
-                    <div>Digite a descrição do produto.</div>
-                    <small>Produto deve ter uma descrição.</small>
-                </div>
-            </div>
+<div class="container">
+  <h4>Novo produto</h4>
+  <br/>
+  <form #formProduto="ngForm">
+    <div class="row">
+      <div class="form-group col-2">
+        <label for="id">Código</label>
+        <input
+          type="text"
+          class="form-control"
+          id="id"
+          name="id"
+          [(ngModel)]="produto.id"
+          disabled>
+        <br/>
+      </div>
+      <div class="form-group col-6">
+        <label for="descricao">Descrição produto</label>
+        <input
+          type="text"
+          class="form-control"
+          id="descricao"
+          name="descricao"
+          [(ngModel)]="produto.descricao"
+          #descricao="ngModel"
+          minlength="2"
+          required>
+        <br/>
+        <div *ngIf="descricao.errors && (descricao.dirty || descricao.touched)" class="alert alert-danger">
+          <div>Digite a descrição do produto.</div>
+          <small>Produto deve ter uma descrição.</small>
         </div>
-        <div class="row">
-            <div class="form-group">
-                <a [routerLink]="['/produto']" class="btn btn-secondary rounded-pill">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
-                </a>
-                &nbsp;		
-                <button type="button" class="btn btn-primary rounded-pill">
-                    <i class="fa fa-save" aria-hidden="true"></i> SALVAR
-                </button>
-            </div>
-        </div>
+      </div>
     </div>
-</form>
+    <div class="row">
+      <div class="form-group">
+        <a [routerLink]="['/produto']" class="btn btn-secondary rounded-pill">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
+        </a>
+        &nbsp;
+        <button type="button"
+                class="btn btn-primary rounded-pill"
+                (click)="atualizar()"
+                [disabled]="!formProduto.form.valid"
+        >
+          <i class="fa fa-save" aria-hidden="true"></i> SALVAR
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
