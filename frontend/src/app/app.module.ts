@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteModule } from './cliente';
 import { ProdutoModule } from './produto';
 import { PedidoModule } from './pedido';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PedidoModule } from './pedido';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ClienteModule,
     ProdutoModule,
     PedidoModule,

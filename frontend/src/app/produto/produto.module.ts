@@ -6,6 +6,7 @@ import { ListarProdutoComponent } from './listar-produto';
 import { InserirProdutoComponent } from './inserir-produto';
 import { EditarProdutoComponent } from './editar-produto';
 import { FormsModule } from "@angular/forms";
+import { NgbPagination } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -13,10 +14,11 @@ import { FormsModule } from "@angular/forms";
     InserirProdutoComponent,
     EditarProdutoComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        NgbPagination
+    ]
 })
 export class ProdutoModule { }

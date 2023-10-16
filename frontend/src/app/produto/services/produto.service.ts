@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Produto } from "../../shared/models/produto.model";
+import { environment } from "../../../environments/environment";
+import { PageRequest } from "../../shared/models/page-request.model";
+import { Observable } from "rxjs";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 const LS_CHAVE: string = "produtos";
 
@@ -8,11 +12,25 @@ const LS_CHAVE: string = "produtos";
 })
 export class ProdutoService {
 
-  constructor() { }
+  private url = `${environment.api}/produtos`;
+
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   listarTodos(): Produto[] {
     const produtos = localStorage[LS_CHAVE];
     return produtos ? JSON.parse(produtos) : [];
+  }
+
+  listarTodosPaginado(size: number, page: number, valueSearch: string): Observable<PageRequest<Produto>> {
+    const options = {
+      params: new HttpParams()
+        .set('size', size)
+        .set('page', page)
+        .set('name', valueSearch)
+    };
+    return this.httpClient.get<any>(this.url, options);
   }
 
   inserir(produto: Produto): void {
