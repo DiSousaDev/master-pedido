@@ -23,10 +23,11 @@ export class InserirClienteComponent {
   }
 
   cadastrar(form: NgForm): void {
-    if(form.valid) {
-      console.log("Formulario valido")
-    } else {
-      alert('Formulário Inválido!')
+    if (form.valid) {
+      this.clienteService.inserir(form.value).subscribe(() => {
+        this.router.navigate(['./cliente/listar'])
+      })
     }
+
   }
 }

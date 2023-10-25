@@ -36,7 +36,7 @@
 					<td>{{ cliente.sobrenome }}</td>
 					<td>{{ cliente.cpf }}</td>
 					<td class="text-center" style="width: 180px">
-						<a [routerLink]="['/cliente/editar']" href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
+						<a [routerLink]="['/cliente/editar/', cliente.idCliente]" href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
 							<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
 						</a>
 					</td>
