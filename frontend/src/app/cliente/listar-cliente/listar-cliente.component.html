@@ -7,13 +7,13 @@
 </nav>
 <div class="conteiner">
 	<h4>Pesquisar cliente</h4>
-	<br/>	
+	<br/>
 	<div class="row">
 		<div class="col-6">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Pesquisar cliente" aria-label="Pesquisar cliente" aria-describedby="btnPesquisarCliente">
 				<button class="btn btn-primary" type="button" id="btnPesquisarCliente"><i class="fa fa-search" aria-hidden="true"></i></button>
-			</div>	
+			</div>
 		</div>
 		<div class="col-6 d-flex flex-row-reverse">
 			<a [routerLink]="['/cliente/inserir']" href="#" title="Novo" alt="Novo" class="btn btn-primary rounded-pill">
@@ -22,8 +22,8 @@
 		</div>
 	</div>
 	<br/>
-	<div class="row">	
-		<table class="table table-striped table-bordered table-hover">
+	<div class="row">
+		<table class="table table-striped table-bordered table-hover" *ngIf="clientes.length > 0; else semClientes">
 			<tbody>
 				<tr>
 					<th>Nome</th>
@@ -31,25 +31,10 @@
 					<th>CPF</th>
 					<th class="text-center" colspan="2">Ações</th>
 				</tr>
-				<tr>
-					<td>((cliente.nome))</td>
-					<td>((cliente.sobrenome))</td>
-					<td>((cliente.cpf))</td>
-					<td class="text-center" style="width: 180px">
-						<a [routerLink]="['/cliente/editar']" href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
-							<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
-						</a>
-					</td>
-					<td class="text-center" style="width: 180px">
-						<a href="#" title="Remover" alt="Remover" class="btn btn-danger rounded-pill">
-							<i class="fa fa-times" aria-hidden="true"></i> REMOVER
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td>Luís</td>
-					<td>Benício Moraes</td>
-					<td>669.844.269-0</td>
+				<tr *ngFor="let cliente of clientes">
+					<td>{{ cliente.nome }}</td>
+					<td>{{ cliente.sobrenome }}</td>
+					<td>{{ cliente.cpf }}</td>
 					<td class="text-center" style="width: 180px">
 						<a [routerLink]="['/cliente/editar']" href="#" title="Editar" alt="Editar" class="btn btn-secondary rounded-pill">
 							<i class="fa fa-edit" aria-hidden="true"></i> EDITAR
@@ -63,6 +48,11 @@
 				</tr>
 			</tbody>
 		</table>
-		<p>Nenhum cliente cadastrado.</p>
 	</div>
 </div>
+
+<ng-template #semClientes>
+  <div>
+    <p>Nenhum cliente cadastrado.</p>
+  </div>
+</ng-template>
