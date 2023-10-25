@@ -26,10 +26,14 @@ export class PedidoService {
     localStorage[LS_CHAVE] = JSON.stringify(pedidos);
   }
 
-  buscarPorId(id: string): Pedido | undefined {
+  buscarPorId(id: number): Pedido | undefined {
     const pedidos = this.listarTodos();
-    // @ts-ignore
-    return pedidos.find(pedido => pedido.id == id);
+    return pedidos.find(pedido => pedido.id === id);
+  }
+
+  buscarPorCpf(cpf: string): Pedido | undefined {
+    const pedidos = this.listarTodos();
+    return pedidos.find(pedido => pedido.cpf === cpf);
   }
 
   atualizar(pedido: Pedido): void {

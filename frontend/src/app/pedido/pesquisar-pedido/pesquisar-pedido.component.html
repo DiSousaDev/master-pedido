@@ -2,7 +2,7 @@
 	<ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
 		<li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
 		<li class="breadcrumb-item"><a [routerLink]="['/pedido']" href="#">Pedido</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Listar pedido</li>
+		<li class="breadcrumb-item active" aria-current="page">Pesquisar pedido</li>
 	</ol>
 </nav>
 <div class="conteiner">
@@ -12,8 +12,8 @@
 		<div class="col-6">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Digite o CPF do cliente" aria-label="Digite o CPF do cliente" aria-describedby="btnPesquisarPedido">
-				<button class="btn btn-primary" type="button" id="btnPesquisarPedido"><i class="fa fa-search" aria-hidden="true"></i></button>
-			</div>	
+				<button [routerLink]="['/pedido/pesquisar', '30535775857']" class="btn btn-primary" type="button" id="btnPesquisarPedido"><i class="fa fa-search" aria-hidden="true"></i></button>
+			</div>			
 		</div>
 		<div class="col-6 d-flex flex-row-reverse">
 			<a [routerLink]="['/pedido/inserir']" href="#" title="Novo" alt="Novo" class="btn btn-primary rounded-pill">

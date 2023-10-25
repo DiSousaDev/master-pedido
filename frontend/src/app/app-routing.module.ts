@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'pedido', redirectTo: 'pedido/pesquisar' },
   { path: 'pedido/inserir', component: InserirPedidoComponent },
   { path: 'pedido/pesquisar', component: PesquisarPedidoComponent },
+  { path: 'pedido/pesquisar/:cpf', component: PesquisarPedidoComponent },
 
   { path: 'produto', redirectTo: 'produto/listar' },
   { path: 'produto/listar', component: ListarProdutoComponent },
