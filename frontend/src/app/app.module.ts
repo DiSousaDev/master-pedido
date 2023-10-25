@@ -9,6 +9,7 @@ import { ClienteModule } from './cliente';
 import { ProdutoModule } from './produto';
 import { PedidoModule } from './pedido';
 import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     ClienteModule,
     ProdutoModule,
     PedidoModule,
