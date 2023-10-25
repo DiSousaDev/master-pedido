@@ -23,26 +23,14 @@ export class ClienteService {
     return clientes ? JSON.parse(clientes) : [];
   }
 
-  inserir(cliente: Cliente): void {
-    const clientes = this.listarTodos();
-    // @ts-ignore
-    clientes.sort((a, b) => a.id - b.id);
-    const lastItem = clientes[clientes.length - 1];
-    // @ts-ignore
-    produto.id = clientes.length > 0 ? lastItem.id + 1 : 1;
-    clientes.push(cliente);
-    localStorage[LS_CHAVE] = JSON.stringify(clientes);
+  inserir(cliente: Cliente): Observable<Cliente> {
+    return this.httpClient.post<Cliente>(this.url, cliente);
   }
 
-  atualizar(cliente: Cliente): void {
-    const clientes = this.listarTodos();
+  atualizar(cliente: Cliente): Observable<Cliente> {
+    const url = `${this.url}/${cliente.idCliente}`
+    return this.httpClient.put<Cliente>(url, cliente)
 
-    clientes.forEach((obj, index, objs) => {
-      if (cliente.idCliente == obj.idCliente) {
-        objs[index] = cliente;
-      }
-    });
-    localStorage[LS_CHAVE] = JSON.stringify(clientes);
   }
 
   remover(id: number): void {

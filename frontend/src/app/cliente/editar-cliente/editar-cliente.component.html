@@ -2,11 +2,11 @@
   <ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
     <li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
     <li class="breadcrumb-item"><a [routerLink]="['/cliente']" href="#">Cliente</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Novo cliente</li>
+    <li class="breadcrumb-item active" aria-current="page">Atualizar cliente</li>
   </ol>
 </nav>
 <div class="conteiner">
-  <h4>Novo cliente</h4>
+  <h4>Atualizar cliente</h4>
   <br/>
   <form #formClient="ngForm" (ngSubmit)="atualizar(formClient)" *ngIf="cliente">
     <div class="row">
@@ -83,7 +83,7 @@
         </a>
         &nbsp;
         <button type="submit" class="btn btn-primary rounded-pill">
-          <i class="fa fa-save" aria-hidden="true"></i> SALVAR
+          <i class="fa fa-save" aria-hidden="true"></i> ATUALIZAR
         </button>
       </div>
     </div>
