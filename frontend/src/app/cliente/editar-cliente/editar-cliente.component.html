@@ -1,50 +1,91 @@
 <nav aria-label="breadcrumb">
-	<ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
-		<li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-		<li class="breadcrumb-item"><a [routerLink]="['/cliente']" href="#">Cliente</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Editar cliente</li>
-	</ol>
+  <ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
+    <li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/cliente']" href="#">Cliente</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Novo cliente</li>
+  </ol>
 </nav>
-<form>
-	<div class="conteiner">
-		<div class="row">
-			<div class="form-group col-4">
-				<label for="nome">Nome:</label>
-				<input type="text" class="form-control" id="nome" name="nome" minlength="2" required> 
-				<br/>
-				<div class="alert alert-danger">
-					<div> Digite o nome do cliente. </div>
-					<small> O sobrenome nome deve conter ao menos 2 caracteres.</small>
-				</div>
-			</div>
-			<div class="form-group col-4">
-				<label for="sobrenome">Sobrenome:</label>
-				<input type="text" class="form-control" id="sobrenome" name="sobrenome" minlength="2" required> 
-				<br/>
-				<div class="alert alert-danger">
-					<div>Digite o sobrenome do cliente.</div>
-					<small>O sobrenome nome deve conter ao menos 2 caracteres.</small>
-				</div>
-			</div>
-			<div class="form-group col-4">
-				<label for="sobrenome">CPF:</label>
-				<input type="text" class="form-control" id="sobrenome" name="sobrenome" minlength="2" required>
-				<br/>
-				<div class="alert alert-danger">
-					<div> Digite um CPF válido.</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="form-group">
-				<a [routerLink]="['/cliente']" class="btn btn-secondary rounded-pill">
-					<i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
-				</a>
-				&nbsp;		
-				<button type="button" class="btn btn-primary rounded-pill">
-					<i class="fa fa-save" aria-hidden="true"></i> SALVAR
-				</button>
-			</div>
-		</div>
-	</div>
-</form>
+<div class="conteiner">
+  <h4>Novo cliente</h4>
+  <br/>
+  <form #formClient="ngForm" (ngSubmit)="atualizar(formClient)" *ngIf="cliente">
+    <div class="row">
+      <div class="form-group col-4">
+        <label for="nome">Nome:</label>
+        <input type="text"
+               class="form-control"
+               id="nome"
+               name="nome"
+               minlength="2"
+               required
+               ngModel
+               [(ngModel)]="cliente.nome"
+               #nome="ngModel"
+
+        >
+        <div *ngIf="(nome?.invalid && nome?.touched) || nome?.dirty">
+          <div class="alert alert-danger" *ngIf="nome?.errors?.['required']">
+            <div> Digite o nome do cliente. </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="nome?.errors?.['minlength']">
+            <small>O nome deve conter ao menos 2 caracteres.</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-4">
+        <label for="sobrenome">Sobrenome:</label>
+        <input type="text"
+               class="form-control"
+               id="sobrenome"
+               name="sobrenome"
+               minlength="2"
+               required
+               ngModel
+               [(ngModel)]="cliente.sobrenome"
+               #sobrenome="ngModel"
+        >
+        <div *ngIf="(sobrenome?.invalid && sobrenome?.touched) || sobrenome?.dirty">
+          <div class="alert alert-danger" *ngIf="sobrenome?.errors?.['required']">
+            <div>Digite o sobrenome do cliente.</div>
+          </div>
+          <div class="alert alert-danger" *ngIf="sobrenome?.errors?.['minlength']">
+            <small>O sobrenome deve conter ao menos 2 caracteres.</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-4">
+        <label for="cpf">CPF:</label>
+        <input type="text"
+               class="form-control"
+               id="cpf"
+               name="cpf"
+               maxlength="11"
+               required
+               ngModel
+               #cpf="ngModel"
+               [(ngModel)]="cliente.cpf"
+               pattern="[0-9]{11}"
+        >
+        <div *ngIf="(cpf?.invalid && cpf?.touched) || cpf?.dirty">
+          <div class="alert alert-danger" *ngIf="cpf?.errors?.['required']">
+            <div>Digite o cpf do cliente.</div>
+          </div>
+          <div class="alert alert-danger" *ngIf="cpf?.errors?.['pattern']">
+            <small>Digite um CPF válido (11 numeros).</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <a [routerLink]="['/cliente']" class="btn btn-secondary rounded-pill">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
+        </a>
+        &nbsp;
+        <button type="submit" class="btn btn-primary rounded-pill">
+          <i class="fa fa-save" aria-hidden="true"></i> SALVAR
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

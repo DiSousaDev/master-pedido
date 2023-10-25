@@ -1,4 +1,4 @@
-import { Component,OnInit,ViewChild } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Cliente } from "../../shared/models/cliente.model";
 import { ClienteService } from "../services/cliente.service";
@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 
 export class EditarClienteComponent implements OnInit {
-  @ViewChild('formCliente') formCliente!: NgForm;
   cliente!: Cliente;
 
   constructor(
@@ -21,17 +20,14 @@ export class EditarClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // snapshot.params de ActivatedRoute dá acesso aos parâmetros passados
     let id = this.route.snapshot.params['id'];
-    const res = this.clienteService.buscarPorId(id);
-    if (res !== undefined)
-      this.cliente = res;
-    else
-      throw new Error("Cliente não encontrado: id = " + id);
+    this.clienteService.buscarPorId(id).subscribe(cliente => {
+      this.cliente = cliente
+    });
   }
 
-  atualizar(): void {
-    if (this.formCliente.form.valid) {
+  atualizar(form: NgForm): void {
+    if (form.valid) {
       this.clienteService.atualizar(this.cliente);
       this.router.navigate(['/cliente/listar']);
     }

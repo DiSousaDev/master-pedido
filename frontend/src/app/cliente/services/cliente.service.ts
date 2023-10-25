@@ -34,17 +34,11 @@ export class ClienteService {
     localStorage[LS_CHAVE] = JSON.stringify(clientes);
   }
 
-  buscarPorId(id: string): Cliente | undefined {
-    const clientes = this.listarTodos();
-    // @ts-ignore
-    return clientes.find(cliente => cliente.id == id);
-  }
-
   atualizar(cliente: Cliente): void {
     const clientes = this.listarTodos();
 
     clientes.forEach((obj, index, objs) => {
-      if (cliente.id == obj.id) {
+      if (cliente.idCliente == obj.idCliente) {
         objs[index] = cliente;
       }
     });
@@ -66,6 +60,11 @@ export class ClienteService {
         .set('name', valueSearch)
     };
     return this.httpClient.get<any>(this.url, options);
+  }
+
+  buscarPorId(id: number): Observable<Cliente> {
+    const url = `${this.url}/${id}`
+    return this.httpClient.get<Cliente>(url)
   }
 
 }
