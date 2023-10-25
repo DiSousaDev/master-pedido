@@ -9,7 +9,7 @@ import { ListarProdutoComponent, EditarProdutoComponent,InserirProdutoComponent 
 const routes: Routes = [
   { path: '', redirectTo: 'cliente/listar', pathMatch: 'full' },
   { path: 'cliente', redirectTo: 'cliente/listar' },
-  { path: 'cliente/editar', component: EditarClienteComponent },
+  { path: 'cliente/editar/:id', component: EditarClienteComponent },
   { path: 'cliente/inserir', component: InserirClienteComponent },
   { path: 'cliente/listar', component: ListarClienteComponent },
 

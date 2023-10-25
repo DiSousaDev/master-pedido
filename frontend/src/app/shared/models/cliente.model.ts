@@ -1,13 +1,12 @@
 export class Cliente {
 
     constructor(
-      public id?: number,
+      public idCliente?: number,
       public nome?: string,
       public sobrenome?: string,
       public cpf?: string
 
     ) {
     }
-  
+
   }
-  
