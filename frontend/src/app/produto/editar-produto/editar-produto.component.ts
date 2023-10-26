@@ -10,8 +10,6 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ['./editar-produto.component.css']
 })
 export class EditarProdutoComponent implements OnInit {
-
-  @ViewChild('formProduto') formProduto!: NgForm;
   produto!: Produto;
 
   constructor(
@@ -32,10 +30,10 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   atualizar(): void {
-    if (this.formProduto.form.valid) {
+    console.log('Atualizando produto')
+      console.log('Atualizando produto form válido')
       this.produtoService.atualizar(this.produto);
       this.router.navigate(['/produto/listar']);
-    }
   }
 
 }
