@@ -1,13 +1,11 @@
 package br.com.masterpedido.services.impl;
 
-import br.com.masterpedido.dto.pedido.PedidoFullDTO;
+import br.com.masterpedido.dto.pedido.PedidoResponse;
 import br.com.masterpedido.repositories.PedidoRepository;
 import br.com.masterpedido.services.PedidoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PedidoServiceImpl implements PedidoService {
@@ -21,9 +19,8 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<PedidoFullDTO> buscarPorCpf(String cpf) {
+    public PedidoResponse buscarPorCpf(String cpf) {
         log.info("Service :: Buscando pedidos do cliente de CPF {}", cpf);
-        return repository.findPedidosByClienteCpf(cpf)
-                .stream().map(PedidoFullDTO::new).toList();
+        return new PedidoResponse(repository.findPedidosByClienteCpf(cpf));
     }
 }
