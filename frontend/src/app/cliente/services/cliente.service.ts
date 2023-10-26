@@ -29,6 +29,7 @@ export class ClienteService {
 
   atualizar(cliente: Cliente): Observable<Cliente> {
     const url = `${this.url}/${cliente.idCliente}`
+    console.log("ATUALIZANDO CLIENTE", url, cliente)
     return this.httpClient.put<Cliente>(url, cliente)
 
   }
