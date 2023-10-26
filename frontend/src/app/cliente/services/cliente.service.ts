@@ -55,4 +55,9 @@ export class ClienteService {
     return this.httpClient.get<Cliente>(url)
   }
 
+  buscarPorCpf(cpf: string): Observable<Cliente> {
+    const url = `${this.url}/${cpf}`
+    return this.httpClient.get<Cliente>(url)
+  }
+
 }
