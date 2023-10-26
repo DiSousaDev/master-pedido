@@ -48,6 +48,7 @@ public class ClienteController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ClienteFullDTO> buscarPorId(@PathVariable Integer id) {
+        System.out.println("LISTANDO CLIENTE ID: " + id);
         return ResponseEntity.ok(clienteService.buscarPorId(id));
     }
 
@@ -67,6 +68,7 @@ public class ClienteController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<ClienteFullDTO> atualizarCliente(@PathVariable Integer id, @RequestBody @Valid ClienteUpdateRequest request) {
+        System.out.println("ATUALIZANDO CLIENTE ID: " + id + " request: " + request);
         return ResponseEntity.ok(clienteService.atualizar(id, request));
     }
 

@@ -10,6 +10,7 @@ import { ProdutoModule } from './produto';
 import { PedidoModule } from './pedido';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule } from "@angular/forms";
     ClienteModule,
     ProdutoModule,
     PedidoModule,
-    NgbModule
+    NgbModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
