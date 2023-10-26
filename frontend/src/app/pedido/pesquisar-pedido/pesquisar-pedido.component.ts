@@ -3,6 +3,8 @@ import { PedidoService } from "../services/pedido.service";
 import { Pedido } from "../../shared/models/pedido.model";
 import { NgForm } from "@angular/forms";
 import { PedidoResponse } from "../../shared/models/pedido-response.model";
+import { ModalVisualizarPedidoComponent } from "../modal-visualizar-pedido/modal-visualizar-pedido.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-pesquisar-pedido',
