@@ -27,11 +27,10 @@ export class EditarClienteComponent implements OnInit {
   }
 
   atualizar(form: NgForm): void {
-    console.log('Atualizando cliente')
     if (form.valid) {
-      console.log('Atualizando cliente form válido')
-      this.clienteService.atualizar(this.cliente);
-      this.router.navigate(['/cliente/listar']);
+      this.clienteService.atualizar(form.value).subscribe(() => {
+        this.router.navigate(['/cliente/listar']);
+      });
     }
   }
 }
