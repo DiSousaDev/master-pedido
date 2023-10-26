@@ -3,20 +3,26 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalVisualizarPedidoComponent } from '../modal-visualizar-pedido/modal-visualizar-pedido.component';
 import { PedidoService } from "../services/pedido.service";
 import { Pedido } from "../../shared/models/pedido.model";
+import { NgForm } from "@angular/forms";
+import { PedidoResponse } from "../../shared/models/pedido-response.model";
 
 @Component({
   selector: 'app-pesquisar-pedido',
   templateUrl: './pesquisar-pedido.component.html',
   styleUrls: ['./pesquisar-pedido.component.css']
 })
-
 export class PesquisarPedidoComponent {
-  pedido: Pedido | undefined;
 
-  constructor(private modalService: NgbModal, private pedidoService: PedidoService) { }
+  pedido!: PedidoResponse;
 
-  abrirModalPedido() {
+  constructor(
+    private modalService: NgbModal,
+    private pedidoService: PedidoService
+  ) { }
+
+  abrirModalPedido(pedido: Pedido) {
     const modalRef = this.modalService.open(ModalVisualizarPedidoComponent);
+    modalRef.componentInstance.pedido = pedido;
   }
 
   //acredito que seja necessario mudar para este quando for sendo implementada as dmais logicas
@@ -24,9 +30,13 @@ export class PesquisarPedidoComponent {
   //   const modalRef = this.modalService.open(ModalVisualizarPedidoComponent);
   //   modalRef.componentInstance.pedidoId = pedidoId;
   // }
-  
 
-  buscarPedidoPorId(id: number) {
-    this.pedido = this.pedidoService.buscarPorId(id.toString()); 
+  buscarPedidoPorCpf(form: NgForm) {
+    if (form.valid) {
+      this.pedidoService.buscarPorCpf(form.value).subscribe(resp => {
+        this.pedido = resp;
+      })
+    }
   }
+
 }
