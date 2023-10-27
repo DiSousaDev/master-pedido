@@ -17,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static java.lang.String.format;
 
 @Service
@@ -55,6 +57,11 @@ public class ClienteServiceImpl implements ClienteService {
     public Page<ClienteFullDTO> listarTodos(Pageable pageable) {
         log.info("Listando todos os clientes");
         return repository.findAll(pageable).map(ClienteFullDTO::new);
+    }
+
+    @Override
+    public List<ClienteFullDTO> buscarContendoCpf(String cpf) {
+        return repository.findByCpfContains(cpf).stream().map(ClienteFullDTO::new).toList();
     }
 
     @Override

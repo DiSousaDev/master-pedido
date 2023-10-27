@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -55,6 +57,11 @@ public class ClienteController {
     @GetMapping(value = "busca-cpf/{cpf}")
     public ResponseEntity<ClienteFullDTO> buscarPorCpf(@PathVariable String cpf) {
         return ResponseEntity.ok(clienteService.buscarPorCpf(cpf));
+    }
+
+    @GetMapping(value = "busca-cpf")
+    public ResponseEntity<List<ClienteFullDTO>> buscarContendoCpf(@RequestParam String cpf) {
+        return ResponseEntity.ok(clienteService.buscarContendoCpf(cpf));
     }
 
     @PostMapping
