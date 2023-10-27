@@ -23,7 +23,7 @@ export class ClienteService {
 
   listarTodos(): Observable<Cliente> {
     return this.httpClient.get<any>(this.url);
-  } 
+  }
 
   listarTodosPaginado(size: number, page: number, valueSearch: string): Observable<PageRequest<Cliente>> {
     const options = {
@@ -33,7 +33,16 @@ export class ClienteService {
         .set('name', valueSearch)
     };
     return this.httpClient.get<any>(this.url, options);
-  } 
+  }
+
+  listarFiltrados(cpf: string): Observable<Cliente[]> {
+    const url = `${this.url}/busca-cpf`
+    const options = {
+      params: new HttpParams()
+        .set('cpf', cpf)
+    };
+    return this.httpClient.get<Cliente[]>(url, options);
+  }
 
   inserir(cliente: Cliente): Observable<Cliente> {
     return this.httpClient.post<Cliente>(this.url, cliente);
