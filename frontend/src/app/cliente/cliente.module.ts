@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { InserirClienteComponent } from './inserir-cliente/inserir-cliente.component';
 import { ListarClienteComponent } from './listar-cliente/listar-cliente.component';
 import { EditarClienteComponent } from './editar-cliente/editar-cliente.component';
+import { VisualizarClienteComponent } from './visualizar-cliente/visualizar-cliente.component';
 import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
     InserirClienteComponent,
     ListarClienteComponent,
-    EditarClienteComponent
+    EditarClienteComponent,
+    VisualizarClienteComponent
   ],
   imports: [
     CommonModule,
