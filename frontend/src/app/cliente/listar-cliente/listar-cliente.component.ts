@@ -32,7 +32,9 @@ export class ListarClienteComponent {
   remover($event: any, cliente: Cliente): void {
     $event.preventDefault();
     if (confirm(`Deseja realmente remover o cliente ${cliente.nome}?`)) {
-      this.clienteService.remover(cliente.idCliente!);
+      this.clienteService.remover(cliente.idCliente!).subscribe(() => {
+        this.listarTodos(36, 0, '');
+      })
     }
-  }
+  }  
 }

@@ -18,10 +18,19 @@ export class ClienteService {
     private httpClient: HttpClient
   ) { }
 
-  listarTodos(): Cliente[] {
-    const clientes = localStorage[LS_CHAVE];
-    return clientes ? JSON.parse(clientes) : [];
-  }
+  listarTodos(): Observable<Cliente> {
+    return this.httpClient.get<any>(this.url);
+  } 
+
+  listarTodosPaginado(size: number, page: number, valueSearch: string): Observable<PageRequest<Cliente>> {
+    const options = {
+      params: new HttpParams()
+        .set('size', size)
+        .set('page', page)
+        .set('name', valueSearch)
+    };
+    return this.httpClient.get<any>(this.url, options);
+  } 
 
   inserir(cliente: Cliente): Observable<Cliente> {
     return this.httpClient.post<Cliente>(this.url, cliente);
@@ -32,21 +41,9 @@ export class ClienteService {
     return this.httpClient.put<Cliente>(url, cliente)
   }
 
-  remover(id: number): void {
-    let clientes = this.listarTodos();
-    // @ts-ignore
-    clientes = clientes.filter(cliente => cliente.id !== id);
-    localStorage[LS_CHAVE] = JSON.stringify(clientes);
-  }
-
-  listarTodosPaginado(size: number, page: number, valueSearch: string): Observable<PageRequest<Cliente>> {
-    const options = {
-      params: new HttpParams()
-        .set('size', size)
-        .set('page', page)
-        .set('name', valueSearch)
-    };
-    return this.httpClient.get<any>(this.url, options);
+  remover(id: number): Observable<Cliente> {
+    const url = `${this.url}/${id}`;
+    return this.httpClient.delete<Cliente>(url);
   }
 
   buscarPorId(id: number): Observable<Cliente> {
