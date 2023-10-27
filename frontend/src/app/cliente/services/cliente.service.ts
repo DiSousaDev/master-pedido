@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Cliente } from "../../shared/models/cliente.model";
-import { Observable } from "rxjs";
-import { PageRequest } from "../../shared/models/page-request.model";
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 import { environment } from "../../../environments/environment";
+import { Cliente } from "../../shared/models/cliente.model";
+import { PageRequest } from "../../shared/models/page-request.model";
 
 const LS_CHAVE: string = "clientes";
 
@@ -41,9 +43,20 @@ export class ClienteService {
     return this.httpClient.put<Cliente>(url, cliente)
   }
 
-  remover(id: number): Observable<Cliente> {
+  remover(id: number): Observable<void> {
     const url = `${this.url}/${id}`;
-    return this.httpClient.delete<Cliente>(url);
+    return this.httpClient.delete<void>(url).pipe(
+      catchError((error: any) => {
+
+        if (error.status === 400) {
+          alert("O cliente não pôde ser excluído pois está atrelado a um ou mais pedidos");
+        } else {
+          alert("Erro ao excluir cliente");
+        }
+        
+        return throwError('Erro ao excluir cliente');
+      })
+    );
   }
 
   buscarPorId(id: number): Observable<Cliente> {
