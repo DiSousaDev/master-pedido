@@ -1,5 +1,6 @@
 package br.com.masterpedido.entities;
 
+import br.com.masterpedido.dto.produto.ItemPedidoDTO;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 
@@ -13,6 +14,12 @@ public class ItemDoPedido implements Serializable {
     private Integer quantidade;
 
     public ItemDoPedido() {
+    }
+
+    public ItemDoPedido(ItemPedidoDTO itemPedidoDTO, Pedido pedido) {
+        id.setPedido(pedido);
+        id.setProduto(new Produto(itemPedidoDTO.produto()));
+        this.quantidade = itemPedidoDTO.quantidade();
     }
 
     public ItemDoPedido(Pedido pedido, Produto produto, Integer quantidade) {

@@ -25,12 +25,6 @@ export class PesquisarPedidoComponent {
     modalRef.componentInstance.pedido = pedido;
   }
 
-  //acredito que seja necessario mudar para este quando for sendo implementada as dmais logicas
-  // abrirModalPedido(pedidoId: number) {
-  //   const modalRef = this.modalService.open(ModalVisualizarPedidoComponent);
-  //   modalRef.componentInstance.pedidoId = pedidoId;
-  // }
-
   buscarPedidoPorCpf(form: NgForm) {
     if (form.valid) {
       this.pedidoService.buscarPorCpf(form.value).subscribe(resp => {

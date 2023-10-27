@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { Pedido } from "../../shared/models/pedido.model";
 import { PedidoService } from "../services/pedido.service";
 import { Router } from "@angular/router";
 import { Produto } from "../../shared/models/produto.model";
 import { ProdutoService } from "../../produto/services/produto.service";
 import { ItemPedido } from "../../shared/models/item-pedido.model";
 import { PedidoDto } from "../../shared/models/pedido-dto.model";
+import { PedidoRequest } from "../../shared/models/pedido-request.model";
 
 @Component({
   selector: 'app-inserir-pedido',
@@ -18,7 +18,6 @@ export class InserirPedidoComponent {
 
   produtosCombo: Produto[] = [];
   produtos: Produto[] = [];
-  pedido!: Pedido;
   itemPedido: ItemPedido[] = [];
   pedidoDto!: PedidoDto;
   produtoSelecionado!: Produto;
@@ -32,7 +31,6 @@ export class InserirPedidoComponent {
 
   ngOnInit(): void {
     this.carregarProdutosCombo();
-    this.pedido = new Pedido();
   }
 
   adicionarProdutoAoPedido(form: NgForm) {
@@ -62,10 +60,12 @@ export class InserirPedidoComponent {
 
   cadastrarPedido(form: NgForm): void {
     if (form.valid) {
-      // this.pedidoService.inserir(this.pedido);
-      // this.router.navigate(["/pedido/listar"]);
-      console.log(form.value)
+      this.pedidoDto = form.value;
+      let pedido = new PedidoRequest(this.pedidoDto.cpf, this.itemPedido);
+      this.pedidoService.inserir(pedido).subscribe(() => {
+        alert(`Produto inserido com sucesso!`);
+        this.router.navigate(['/cliente/listar']);
+      });
     }
   }
-
 }
