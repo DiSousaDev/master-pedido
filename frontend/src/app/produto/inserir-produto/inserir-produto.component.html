@@ -10,13 +10,12 @@
   <h4>Novo produto</h4>
   <br/>
   <form #formProduto="ngForm" (ngSubmit)="inserir(formProduto)">
-    <div class="row">
+    <div class="row mb-2">
       <div class="form-group col-4">
         <label for="descricao">Descrição produto</label>
         <input type="text" class="form-control" id="descricao" name="descricao" [(ngModel)]="produto.descricao"
                #descricao="ngModel" minlength="2" required>
-        <br/>
-        <div *ngIf="descricao.errors && (descricao.dirty || descricao.touched)" class="alert alert-danger">
+        <div *ngIf="descricao.errors && (descricao.dirty || descricao.touched)" class="alert alert-danger mt-2">
           <div>Digite a descrição do produto.</div>
           <small>Produto deve ter uma descrição.</small>
         </div>

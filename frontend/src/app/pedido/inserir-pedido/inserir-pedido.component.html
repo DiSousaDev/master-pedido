@@ -24,10 +24,10 @@
                  pattern="[0-9]{11}"
           >
           <div *ngIf="(cpf?.invalid && cpf?.touched) || cpf?.dirty">
-            <div class="alert alert-danger mt-3" *ngIf="cpf?.errors?.['required']">
+            <div class="alert alert-danger mt-2" *ngIf="cpf?.errors?.['required']">
               <div>Digite o cpf do cliente.</div>
             </div>
-            <div class="alert alert-danger mt-3" *ngIf="cpf?.errors?.['pattern']">
+            <div class="alert alert-danger mt-2" *ngIf="cpf?.errors?.['pattern']">
               <small>Digite um CPF válido (11 numeros).</small>
             </div>
           </div>
@@ -47,7 +47,7 @@
                     value="{{ prod.id }}">{{ prod.descricao }}</option>
           </select>
           <div *ngIf="(produto.invalid && produto?.touched) || produto?.dirty">
-            <div class="alert alert-danger mt-3" *ngIf="produto?.errors?.['required']">
+            <div class="alert alert-danger mt-2" *ngIf="produto?.errors?.['required']">
               Selecione um produto.<br/>
               <small *ngIf="produto?.errors?.['required']">Para criar um pedido, selecione um produto.</small>
             </div>
@@ -67,11 +67,11 @@
                  #quantidade="ngModel"
           >
           <div *ngIf="(quantidade?.invalid && quantidade?.touched) || quantidade?.dirty">
-            <div class="alert alert-danger mt-3" *ngIf="quantidade?.errors?.['required']">Informe a quantidade.<br/>
+            <div class="alert alert-danger mt-2" *ngIf="quantidade?.errors?.['required']">Informe a quantidade.<br/>
               <small *ngIf="quantidade?.errors?.['required']">Para criar um pedido, informe a quantidade do
                 produto.</small>
             </div>
-            <div class="alert alert-danger mt-3" *ngIf="quantidade?.errors?.['numeroNegativoValidator']">Informe uma
+            <div class="alert alert-danger mt-2" *ngIf="quantidade?.errors?.['numeroNegativoValidator']">Informe uma
               quantidade positiva.<br/></div>
           </div>
         </div>
@@ -120,7 +120,7 @@
 </div>
 
 <ng-template #semItemPedido>
-  <div>
+  <div class="alert alert-warning">
     Selecione um produto para adicionar ao pedido.
   </div>
 </ng-template>

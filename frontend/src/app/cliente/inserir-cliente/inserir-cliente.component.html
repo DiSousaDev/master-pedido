@@ -21,7 +21,7 @@
                ngModel
                #nome="ngModel"
         >
-        <div *ngIf="(nome?.invalid && nome?.touched) || nome?.dirty">
+        <div class="mt-2" *ngIf="(nome?.invalid && nome?.touched) || nome?.dirty">
           <div class="alert alert-danger" *ngIf="nome?.errors?.['required']">
             <div> Digite o nome do cliente. </div>
           </div>
@@ -41,7 +41,7 @@
                ngModel
                #sobrenome="ngModel"
         >
-        <div *ngIf="(sobrenome?.invalid && sobrenome?.touched) || sobrenome?.dirty">
+        <div class="mt-2" *ngIf="(sobrenome?.invalid && sobrenome?.touched) || sobrenome?.dirty">
           <div class="alert alert-danger" *ngIf="sobrenome?.errors?.['required']">
             <div>Digite o sobrenome do cliente.</div>
           </div>
@@ -62,7 +62,7 @@
                #cpf="ngModel"
                pattern="[0-9]{11}"
         >
-        <div *ngIf="(cpf?.invalid && cpf?.touched) || cpf?.dirty">
+        <div class="mt-2" *ngIf="(cpf?.invalid && cpf?.touched) || cpf?.dirty">
           <div class="alert alert-danger" *ngIf="cpf?.errors?.['required']">
             <div>Digite o cpf do cliente.</div>
           </div>
