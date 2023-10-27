@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Produto } from "../../shared/models/produto.model";
-import { environment } from "../../../environments/environment";
-import { PageRequest } from "../../shared/models/page-request.model";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { environment } from "../../../environments/environment";
 
-
+import { Produto } from "../../shared/models/produto.model";
+import { PageRequest } from "../../shared/models/page-request.model";
 
 const LS_CHAVE: string = "produtos";
 
@@ -66,7 +65,7 @@ export class ProdutoService {
         } else {
           alert("Erro ao excluir produto");
         }
-        
+
         return throwError('Erro ao excluir produto');
       })
     );

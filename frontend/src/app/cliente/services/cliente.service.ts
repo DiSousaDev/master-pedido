@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from "../../../environments/environment";
+
 import { Cliente } from "../../shared/models/cliente.model";
 import { PageRequest } from "../../shared/models/page-request.model";
 
@@ -53,7 +54,7 @@ export class ClienteService {
         } else {
           alert("Erro ao excluir cliente");
         }
-        
+
         return throwError('Erro ao excluir cliente');
       })
     );
