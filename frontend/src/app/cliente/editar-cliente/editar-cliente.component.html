@@ -81,7 +81,7 @@
         <a [routerLink]="['/cliente']" class="btn btn-secondary rounded-pill">
           <i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
         </a>
-        &nbsp;
+        <input type="hidden" name="idCliente" [(ngModel)]="cliente.idCliente">
         <button type="submit" class="btn btn-primary rounded-pill">
           <i class="fa fa-save" aria-hidden="true"></i> ATUALIZAR
         </button>

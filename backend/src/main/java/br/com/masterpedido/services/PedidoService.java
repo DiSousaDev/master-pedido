@@ -1,11 +1,9 @@
 package br.com.masterpedido.services;
 
-import br.com.masterpedido.dto.pedido.PedidoFullDTO;
-
-import java.util.List;
+import br.com.masterpedido.dto.pedido.PedidoResponse;
 
 public interface PedidoService {
 
-    List<PedidoFullDTO> buscarPorCpf(String cpf);
+    PedidoResponse buscarPorCpf(String cpf);
 
 }

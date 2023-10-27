@@ -30,7 +30,6 @@ export class ClienteService {
   atualizar(cliente: Cliente): Observable<Cliente> {
     const url = `${this.url}/${cliente.idCliente}`
     return this.httpClient.put<Cliente>(url, cliente)
-
   }
 
   remover(id: number): void {
@@ -52,6 +51,11 @@ export class ClienteService {
 
   buscarPorId(id: number): Observable<Cliente> {
     const url = `${this.url}/${id}`
+    return this.httpClient.get<Cliente>(url)
+  }
+
+  buscarPorCpf(cpf: string): Observable<Cliente> {
+    const url = `${this.url}/${cpf}`
     return this.httpClient.get<Cliente>(url)
   }
 
