@@ -64,7 +64,7 @@ export class InserirPedidoComponent {
       let pedido = new PedidoRequest(this.pedidoDto.cpf, this.itemPedido);
       this.pedidoService.inserir(pedido).subscribe(() => {
         alert(`Produto inserido com sucesso!`);
-        this.router.navigate(['/cliente/listar']);
+        this.router.navigate(['/pedido/inserir']);
       });
     }
   }
