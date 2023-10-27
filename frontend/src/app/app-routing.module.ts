@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { InserirClienteComponent, EditarClienteComponent, ListarClienteComponent } from './cliente';
 import { InserirPedidoComponent, PesquisarPedidoComponent, VisualizarPedidoComponent } from './pedido';
 import { ListarProdutoComponent, EditarProdutoComponent,InserirProdutoComponent } from './produto';
+import { VisualizarClienteComponent } from './cliente/visualizar-cliente';
 
 const routes: Routes = [
   { path: '', redirectTo: 'cliente/listar', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'cliente/editar/:id', component: EditarClienteComponent },
   { path: 'cliente/inserir', component: InserirClienteComponent },
   { path: 'cliente/listar', component: ListarClienteComponent },
+  { path: 'cliente/visualizar/:cpf', component: VisualizarClienteComponent },
 
   { path: 'pedido', redirectTo: 'pedido/pesquisar' },
   { path: 'pedido/inserir', component: InserirPedidoComponent },
