@@ -27,7 +27,6 @@ import { CommonModule } from "@angular/common";
     NgbModule,
     CommonModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

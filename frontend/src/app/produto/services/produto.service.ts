@@ -23,6 +23,11 @@ export class ProdutoService {
     return produtos ? JSON.parse(produtos) : [];
   }
 
+  listarTodosProdutos(): Observable<Produto[]> {
+    const url = `${this.url}/all`
+    return this.httpClient.get<Produto[]>(url)
+  }
+
   listarTodosPaginado(size: number, page: number, valueSearch: string): Observable<PageRequest<Produto>> {
     const options = {
       params: new HttpParams()
