@@ -15,6 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
 
@@ -32,6 +35,12 @@ public class ProdutoServiceImpl implements ProdutoService {
         return repository.findById(id)
                 .map(ProdutoFullDTO::new)
                 .orElseThrow(() -> new EntityNotFoundException("Produto id: " + id + " não encontrado"));
+    }
+
+    @Override
+    public List<ProdutoFullDTO> listarTodos() {
+        log.info("Listando todos os produtos");
+        return repository.findAll().stream().map(ProdutoFullDTO::new).collect(Collectors.toList());
     }
 
     @Override
