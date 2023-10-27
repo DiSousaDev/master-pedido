@@ -21,9 +21,11 @@ export class InserirProdutoComponent implements OnInit {
     this.produto = new Produto();
   }
 
-  inserir(): void {
+  inserir(form: NgForm): void {
+    if (form.valid) {
     this.produtoService.inserir(this.produto).subscribe(() => {
       this.router.navigate(["./produto/listar"]);
     });
+  }
   }
 }

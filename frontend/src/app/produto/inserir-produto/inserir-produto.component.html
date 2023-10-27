@@ -9,7 +9,7 @@
 <div class="container">
 	<h4>Novo produto</h4>
 	<br />
-	<form #formProduto="ngForm">
+	<form #formProduto="ngForm" (ngSubmit)="inserir(formProduto)">
 		<div class="row">
 			<div class="form-group col-4">
 				<label for="descricao">Descrição produto</label>
@@ -28,8 +28,7 @@
 					<i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
 				</a>
 				&nbsp;
-				<button type="button" class="btn btn-primary rounded-pill" (click)="inserir()"
-					[disabled]="!formProduto.form.valid">
+				<button type="submit" class="btn btn-primary rounded-pill">
 					<i class="fa fa-save" aria-hidden="true"></i> SALVAR
 				</button>
 			</div>

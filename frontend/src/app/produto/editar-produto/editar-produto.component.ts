@@ -20,20 +20,22 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // snapshot.params de ActivatedRoute dá acesso aos parâmetros passados
     let id = this.route.snapshot.params['id'];
-    const res = this.produtoService.buscarPorId(id);
-    if (res !== undefined)
-      this.produto = res;
-    else
-      throw new Error("Produto não encontrado: id = " + id);
+    this.produtoService.buscarPorId(id).subscribe(produto => {
+      this.produto = produto;
+    });
   }
 
-  atualizar(): void {
-    console.log('Atualizando produto')
-      console.log('Atualizando produto form válido')
-      this.produtoService.atualizar(this.produto);
-      this.router.navigate(['/produto/listar']);
+  atualizar(form: NgForm): void {
+    console.log('Atualizando produto');
+    if (form.valid) {
+      console.log('Atualizando produto form válido');
+      this.produtoService.atualizar(this.produto).subscribe(updatedProduto => {
+        console.log('Produto atualizado com sucesso:', updatedProduto);
+        this.router.navigate(['/produto']);
+      }, error => {
+        console.error('Erro ao atualizar o produto:', error);
+      });
+    }
   }
-
 }
