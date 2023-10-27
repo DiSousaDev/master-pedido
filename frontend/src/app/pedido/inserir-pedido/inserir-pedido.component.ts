@@ -64,6 +64,8 @@ export class InserirPedidoComponent {
       let pedido = new PedidoRequest(this.pedidoDto.cpf, this.itemPedido);
       this.pedidoService.inserir(pedido).subscribe(() => {
         alert(`Produto inserido com sucesso!`);
+        form.resetForm();
+        this.itemPedido = [];
         this.router.navigate(['/pedido/inserir']);
       });
     }
