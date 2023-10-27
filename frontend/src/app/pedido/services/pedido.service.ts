@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Pedido } from "../../shared/models/pedido.model";
+import { Observable } from "rxjs";
+import { environment } from "../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { CpfRequest } from "../../shared/models/cpf-request.model";
+import { PedidoResponse } from "../../shared/models/pedido-response.model";
 
 const LS_CHAVE: string = "pedidos";
 
@@ -8,7 +13,11 @@ const LS_CHAVE: string = "pedidos";
 })
 export class PedidoService {
 
-  constructor() { }
+  private url = `${environment.api}/pedidos`;
+
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   listarTodos(): Pedido[] {
     const pedidos = localStorage[LS_CHAVE];
@@ -26,21 +35,22 @@ export class PedidoService {
     localStorage[LS_CHAVE] = JSON.stringify(pedidos);
   }
 
-  buscarPorId(id: number): Pedido | undefined {
-    const pedidos = this.listarTodos();
-    return pedidos.find(pedido => pedido.id === id);
+  buscarPorCpf(cpfRequest: CpfRequest): Observable<PedidoResponse> {
+    const url = `${this.url}/${cpfRequest.cpf}`
+    return this.httpClient.get<PedidoResponse>(url);
   }
 
-  buscarPorCpf(cpf: string): Pedido | undefined {
+  buscarPorId(id: string): Pedido | undefined {
     const pedidos = this.listarTodos();
-    return pedidos.find(pedido => pedido.cpf === cpf);
+    // @ts-ignore
+    return pedidos.find(pedido => pedido.id == id);
   }
 
   atualizar(pedido: Pedido): void {
     const pedidos = this.listarTodos();
 
     pedidos.forEach((obj, index, objs) => {
-      if (pedido.id == obj.id) {
+      if (pedido.idPedido == obj.idPedido) {
         objs[index] = pedido;
       }
     });

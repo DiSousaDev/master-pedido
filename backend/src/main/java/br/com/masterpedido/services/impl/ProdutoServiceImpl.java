@@ -1,5 +1,6 @@
 package br.com.masterpedido.services.impl;
 
+import br.com.masterpedido.controllers.exceptions.DatabaseException;
 import br.com.masterpedido.dto.produto.ProdutoFullDTO;
 import br.com.masterpedido.dto.produto.ProdutoRequest;
 import br.com.masterpedido.dto.produto.ProdutoUpdateRequest;
@@ -9,6 +10,7 @@ import br.com.masterpedido.services.ProdutoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -57,6 +59,10 @@ public class ProdutoServiceImpl implements ProdutoService {
     public void deletarPorId(Integer id) {
         log.info("Deletando produto por id: {}", id);
         ProdutoFullDTO produtoFullDTO = buscarPorId(id);
-        repository.delete(new Produto(produtoFullDTO));
+        try {
+            repository.delete(new Produto(produtoFullDTO));
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Não é possível excluir um produto que possui pedidos");
+        }
     }
 }
