@@ -1,11 +1,23 @@
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
-		<li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+		<li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a>
+		</li>
 		<li class="breadcrumb-item"><a [routerLink]="['/produto']" href="#">Produto</a></li>
 		<li class="breadcrumb-item active" aria-current="page">Novo produto</li>
 	</ol>
 </nav>
 <div class="container">
+main
+	<h4>Novo produto</h4>
+	<br />
+	<form #formProduto="ngForm" (ngSubmit)="inserir(formProduto)">
+		<div class="row">
+			<div class="form-group col-4">
+				<label for="descricao">Descrição produto</label>
+				<input type="text" class="form-control" id="descricao" name="descricao" [(ngModel)]="produto.descricao"
+					#descricao="ngModel" minlength="2" required>
+				<br />
+
 	<h4>Novo Produto</h4>
 	<br/>
 	<form #formProduto="ngForm">
@@ -22,6 +34,7 @@
           minlength="2"
           required>
 				<br/>
+main
 				<div *ngIf="descricao.errors && (descricao.dirty || descricao.touched)" class="alert alert-danger">
 					<div>Digite a descrição do produto.</div>
 					<small>Produto deve ter uma descrição.</small>
@@ -34,11 +47,7 @@
 					<i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
 				</a>
 				&nbsp;
-				<button type="button"
-                class="btn btn-primary rounded-pill"
-                (click)="inserir()"
-                [disabled]="!formProduto.form.valid"
-        >
+				<button type="submit" class="btn btn-primary rounded-pill">
 					<i class="fa fa-save" aria-hidden="true"></i> SALVAR
 				</button>
 			</div>

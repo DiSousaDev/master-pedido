@@ -33,39 +33,23 @@ export class ProdutoService {
     return this.httpClient.get<any>(this.url, options);
   }
 
-  inserir(produto: Produto): void {
-    const produtos = this.listarTodos();
-    // @ts-ignore
-    produtos.sort((a, b) => a.id - b.id);
-    const lastItem = produtos[produtos.length - 1];
-    // @ts-ignore
-    produto.id = produtos.length > 0 ? lastItem.id + 1 : 1;
-    produtos.push(produto);
-    localStorage[LS_CHAVE] = JSON.stringify(produtos);
+  inserir(produto: Produto): Observable<Produto> {
+    return this.httpClient.post<Produto>(this.url, produto);
   }
 
-  buscarPorId(id: string): Produto | undefined {
-    const produtos = this.listarTodos();
-    // @ts-ignore
-    return produtos.find(produto => produto.id == id);
+  buscarPorId(id: number): Observable<Produto> {
+    const url = `${this.url}/${id}`
+    return this.httpClient.get<Produto>(url)
   }
 
-  atualizar(produto: Produto): void {
-    const produtos = this.listarTodos();
-
-    produtos.forEach((obj, index, objs) => {
-      if (produto.id == obj.id) {
-        objs[index] = produto;
-      }
-    });
-    localStorage[LS_CHAVE] = JSON.stringify(produtos);
+  atualizar(produto: Produto): Observable<Produto> {
+    const url = `${this.url}/${produto.id}`;
+    return this.httpClient.put<Produto>(url, produto);
   }
 
-  remover(id: number): void {
-    let produtos = this.listarTodos();
-    // @ts-ignore
-    produtos = produtos.filter(produto => produto.id !== id);
-    localStorage[LS_CHAVE] = JSON.stringify(produtos);
+  remover(id: number): Observable<void> {
+    const url = `${this.url}/${id}`;
+    return this.httpClient.delete<void>(url);
   }
 
 }
