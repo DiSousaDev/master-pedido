@@ -1,18 +1,18 @@
 <nav aria-label="breadcrumb">
-	<ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
-		<li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-		<li class="breadcrumb-item"><a [routerLink]="['/pedido']" href="#">Pedido</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Novo pedido</li>
-	</ol>
+  <ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
+    <li class="breadcrumb-item"><a [routerLink]="['/']" href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/pedido']" href="#">Pedido</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Novo pedido</li>
+  </ol>
 </nav>
-<div class="conteiner">
-	<h4>Novo Pedido</h4>
-	<br/>
-	<div class="row">
-		<form #formPedido="ngForm" (ngSubmit)="cadastrarPedido(formPedido)">
-			<div class="row">
-				<div class="form-group col-3">
-					<label for="cpf">CPF</label>
+<div class="container">
+  <h4>Novo Pedido</h4>
+  <br/>
+  <div class="row">
+    <form #formPedido="ngForm" (ngSubmit)="cadastrarPedido(formPedido)">
+      <div class="row">
+        <div class="form-group col-3">
+          <label for="cpf">CPF</label>
           <input type="text"
                  class="form-control"
                  id="cpf"
@@ -31,9 +31,9 @@
               <small>Digite um CPF válido (11 numeros).</small>
             </div>
           </div>
-				</div>
-				<div class="form-group col-3">
-					<label for="produto">Produto</label>
+        </div>
+        <div class="form-group col-3">
+          <label for="produto">Produto</label>
           <select id="produto"
                   name="produto"
                   class="form-select"
@@ -42,19 +42,20 @@
                   #produto="ngModel"
                   required
           >
-						<option value="" selected>Selecione o produto</option>
-						<option *ngFor="let prod of produtosCombo" [ngValue]="prod" value="{{ prod.id }}">{{ prod.descricao }}</option>
-					</select>
+            <option value="" selected>Selecione o produto</option>
+            <option *ngFor="let prod of produtosCombo" [ngValue]="prod"
+                    value="{{ prod.id }}">{{ prod.descricao }}</option>
+          </select>
           <div *ngIf="(produto.invalid && produto?.touched) || produto?.dirty">
             <div class="alert alert-danger mt-3" *ngIf="produto?.errors?.['required']">
               Selecione um produto.<br/>
               <small *ngIf="produto?.errors?.['required']">Para criar um pedido, selecione um produto.</small>
             </div>
           </div>
-				</div>
-				<div class="form-group col-3">
-					<label for="quantidade">Quantidade</label>
-					<input type="number"
+        </div>
+        <div class="form-group col-3">
+          <label for="quantidade">Quantidade</label>
+          <input type="number"
                  class="form-control"
                  id="quantidade"
                  name="quantidade"
@@ -67,55 +68,55 @@
           >
           <div *ngIf="(quantidade?.invalid && quantidade?.touched) || quantidade?.dirty">
             <div class="alert alert-danger mt-3" *ngIf="quantidade?.errors?.['required']">Informe a quantidade.<br/>
-              <small *ngIf="quantidade?.errors?.['required']">Para criar um pedido, informe a quantidade do produto.</small>
+              <small *ngIf="quantidade?.errors?.['required']">Para criar um pedido, informe a quantidade do
+                produto.</small>
             </div>
-            <div class="alert alert-danger mt-3" *ngIf="quantidade?.errors?.['numeroNegativoValidator']">Informe uma quantidade positiva.<br/></div>
+            <div class="alert alert-danger mt-3" *ngIf="quantidade?.errors?.['numeroNegativoValidator']">Informe uma
+              quantidade positiva.<br/></div>
           </div>
-				</div>
-				<div class="form-group col-3">
-					<br/>
-					<button type="button" class="btn btn-primary rounded-pill" (click)="adicionarProdutoAoPedido(formPedido)">
-						<i class="fa fa-save" aria-hidden="true"></i> ADICIONAR
-					</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	<br/>
-	<div class="row">
-		<form>
-			<div class="form-group">
-				<table class="table table-striped table-bordered table-hover">
-					<tbody *ngIf="itemPedido.length > 0; else semItemPedido">
-						<tr>
-							<th>Descrição do Produto</th>
-							<th>Quantidade do Produto</th>
+        </div>
+        <div class="form-group col-3">
+          <br/>
+          <button type="button" class="btn btn-primary rounded-pill" (click)="adicionarProdutoAoPedido(formPedido)">
+            <i class="fa fa-save" aria-hidden="true"></i> ADICIONAR
+          </button>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="form-group">
+          <table class="table table-striped table-bordered table-hover">
+            <tbody *ngIf="itemPedido.length > 0; else semItemPedido">
+            <tr>
+              <th>Descrição do Produto</th>
+              <th>Quantidade do Produto</th>
               <th></th>
-						</tr>
-              <tr *ngFor="let item of itemPedido">
-                <td>{{ item.produto.descricao }}</td>
-                <td>{{ item.quantidade }}</td>
-                <td class="text-center" style="width: 180px">
-                  <a title="Remover" class="btn btn-danger rounded-pill" (click)="removerProdutodoPedido($event, item)">
-                    <i class="fa fa-times" aria-hidden="true"></i> REMOVER
-                  </a>
-                </td>
-              </tr>
-					</tbody>
-				</table>
-			</div>
-			<br/>
-			<div class="form-group">
-				<a [routerLink]="['/pedido']" class="btn btn-secondary rounded-pill">
-					<i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
-				</a>
-				&nbsp;
-				<button type="submit" class="btn btn-primary rounded-pill">
-					<i class="fa fa-save" aria-hidden="true"></i> FINALIZAR PEDIDO
-				</button>
-			</div>
-		</form>
-	</div>
+            </tr>
+            <tr *ngFor="let item of itemPedido">
+              <td>{{ item.produto.descricao }}</td>
+              <td>{{ item.quantidade }}</td>
+              <td class="text-center" style="width: 180px">
+                <a title="Remover" class="btn btn-danger rounded-pill" (click)="removerProdutodoPedido($event, item)">
+                  <i class="fa fa-times" aria-hidden="true"></i> REMOVER
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <br/>
+        <div class="form-group">
+          <a [routerLink]="['/pedido']" class="btn btn-secondary rounded-pill">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> VOLTAR
+          </a>
+          &nbsp;
+          <button type="submit" class="btn btn-primary rounded-pill">
+            <i class="fa fa-save" aria-hidden="true"></i> FINALIZAR PEDIDO
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 <ng-template #semItemPedido>
