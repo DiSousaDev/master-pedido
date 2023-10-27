@@ -54,17 +54,18 @@ export class InserirPedidoComponent {
     }
   }
 
-  cadastrarPedido(form: NgForm): void {
-    if (form.valid) {
-      this.pedidoService.inserir(this.pedido);
-      this.router.navigate(["/pedido/listar"]);
-    }
-  }
-
   carregarProdutosCombo() {
     this.produtoService.listarTodosProdutos().subscribe(resp => {
       this.produtosCombo = resp
     })
+  }
+
+  cadastrarPedido(form: NgForm): void {
+    if (form.valid) {
+      // this.pedidoService.inserir(this.pedido);
+      // this.router.navigate(["/pedido/listar"]);
+      console.log(form.value)
+    }
   }
 
 }
