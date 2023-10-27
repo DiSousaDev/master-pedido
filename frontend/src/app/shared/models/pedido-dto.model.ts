@@ -1,10 +1,11 @@
 import { Produto } from "./produto.model";
 
-export class ItemPedido {
+export class PedidoDto {
 
   constructor(
+    public produto: Produto,
     public quantidade: number,
-    public produto: Produto
+    public cpf: string
   ) {
   }
 
