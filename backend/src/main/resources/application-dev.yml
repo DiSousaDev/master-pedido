@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/master_pedido?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC
     username: root
-    password:
+    password: wm2CZEsS7IATE6qcW4
   jpa:
     hibernate:
       ddl-auto: update
