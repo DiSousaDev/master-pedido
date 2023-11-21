@@ -3,7 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:app/routes/routes.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  String dropdownValueCliente = 'Cliente';
+  String dropdownValueProduto = 'Produto';
+  String dropdownValuePedido = 'Pedido';
+
   Widget _createHeader() {
     return DrawerHeader(
         margin: EdgeInsets.zero,
@@ -16,7 +25,7 @@ class AppDrawer extends StatelessWidget {
           Positioned(
               bottom: 12.0,
               left: 16.0,
-              child: Text("Cliente",
+              child: Text("Menu",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
@@ -42,6 +51,116 @@ class AppDrawer extends StatelessWidget {
     );
   }
 
+  Widget _createDropdownCliente() {
+    return ListTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Expanded(
+            child: DropdownButton<String>(
+              underline:
+                  Container(), // Remover a linha abaixo do DropdownButton
+              value: dropdownValueCliente,
+              isExpanded: true,
+
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValueCliente = newValue!;
+                  if (dropdownValueCliente == 'Inserir Cliente') {
+                    Navigator.pushReplacementNamed(
+                        context, Routes.insertCliente);
+                  } else if (dropdownValueCliente == 'Listar Cliente') {
+                    Navigator.pushReplacementNamed(context, Routes.listCliente);
+                  }
+                });
+              },
+              items: <String>['Cliente', 'Inserir Cliente', 'Listar Cliente']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _createDropdownProduto() {
+    return ListTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Expanded(
+            child: DropdownButton<String>(
+              underline:
+                  Container(), // Remover a linha abaixo do DropdownButton
+              value: dropdownValueProduto,
+              isExpanded: true,
+
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValueProduto = newValue!;
+                  if (dropdownValueProduto == 'Inserir Produto') {
+                    Navigator.pushReplacementNamed(
+                        context, Routes.insertCliente);
+                  } else if (dropdownValueProduto == 'Pesquisar Produto') {
+                    Navigator.pushReplacementNamed(context, Routes.listCliente);
+                  }
+                });
+              },
+              items: <String>['Produto', 'Inserir Produto', 'Pesquisar Produto']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _createDropdownPedido() {
+    return ListTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Expanded(
+            child: DropdownButton<String>(
+              underline:
+                  Container(), // Remover a linha abaixo do DropdownButton
+              value: dropdownValuePedido,
+              isExpanded: true,
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValuePedido = newValue!;
+                  if (dropdownValuePedido == 'Inserir Pedido') {
+                    Navigator.pushReplacementNamed(
+                        context, Routes.insertCliente);
+                  } else if (dropdownValuePedido == 'Pesquisar Pedido') {
+                    Navigator.pushReplacementNamed(context, Routes.listCliente);
+                  }
+                });
+              },
+              items: <String>['Pedido', 'Inserir Pedido', 'Pesquisar Pedido']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -49,17 +168,10 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           _createHeader(),
-          _createDrawerItem(
-              icon: Icons.add,
-              text: 'Inserir Cliente',
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, Routes.insert)),
+          _createDropdownCliente(),
+          _createDropdownProduto(),
+          _createDropdownPedido(),
           Divider(),
-          _createDrawerItem(
-              icon: Icons.list,
-              text: 'Listar Cliente',
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, Routes.list)),
           ListTile(
             title: Text('0.0.1'),
             onTap: () {},

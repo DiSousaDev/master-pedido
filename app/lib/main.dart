@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
       ),
       home: MyHomePage(title: 'Master pedido'),
       routes: {
-        Routes.edit: (context) => EditarClientePage(),
-        Routes.insert: (context) => InserirClientePage(),
-        Routes.list: (context) => ListarClientePage(),
+        Routes.editCliente: (context) => EditarClientePage(),
+        Routes.insertCliente: (context) => InserirClientePage(),
+        Routes.listCliente: (context) => ListarClientePage(),
       },
     );
   }
