@@ -28,6 +28,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  static const String routeName = '/';
+
   MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
   @override

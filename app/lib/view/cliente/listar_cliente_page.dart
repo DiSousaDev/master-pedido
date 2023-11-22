@@ -1,10 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:app/model/cliente.dart';
 import 'package:app/view/cliente/editar_cliente_page.dart';
-
 import 'package:app/widgets/drawer.dart';
-import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class ListarClientePage extends StatefulWidget {
   static const String routeName = '/list';
 
@@ -15,6 +13,9 @@ class ListarClientePage extends StatefulWidget {
 
 class _ListarClientePageState extends State<ListarClientePage> {
   List<Cliente> _lista = <Cliente>[];
+  List<Cliente> _searchResult = <Cliente>[];
+
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -22,30 +23,38 @@ class _ListarClientePageState extends State<ListarClientePage> {
     _refreshList();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   void _refreshList() async {
     List<Cliente> tempList = await _obterTodos();
+
+    // Se o campo de pesquisa não estiver vazio, filtra os resultados
+    if (_searchController.text.isNotEmpty) {
+      _searchResult = tempList.where((cliente) {
+        return cliente.nome
+            .toLowerCase()
+            .contains(_searchController.text.toLowerCase());
+      }).toList();
+    } else {
+      _searchResult = tempList;
+    }
+
     setState(() {
       _lista = tempList;
     });
   }
 
   Future<List<Cliente>> _obterTodos() async {
-    // Banco de Dados Buscar as Informações
+    // Simulando dados do banco de dados
     return <Cliente>[
-      Cliente(1, "Cliente 1", "Geraldo", '813095713807'),
-      Cliente(2, "Cliente 2", "Gustavo", '928492460924'),
-      Cliente(3, "Cliente 3", "Milene", '9284935901953'),
+      Cliente(1, "Geraldo", "Silva", '813095713807'),
+      Cliente(2, "Gustavo", "Costa", '928492460924'),
+      Cliente(3, "Milene", "Oliveira", '9284935901953'),
     ];
   }
 
-  void _removerCliente(int id) async {
-    // dado um cliente remove o boi da base
+  void _removerCliente(int id) {
+    // Implementar a lógica de remoção do cliente
   }
+
   void _showItem(BuildContext context, int index) {
     Cliente cliente = _lista[index];
     showDialog(
@@ -64,7 +73,7 @@ class _ListarClientePageState extends State<ListarClientePage> {
             TextButton(
               child: Text("OK"),
               onPressed: () {
-                Navigator.of(context).pop(); // fecha a dialog
+                Navigator.of(context).pop(); // Fecha a dialog
               },
             ),
           ],
@@ -85,27 +94,28 @@ class _ListarClientePageState extends State<ListarClientePage> {
   void _removeItem(BuildContext context, int index) {
     Cliente cliente = _lista[index];
     showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-              title: Text("Remover Cliente"),
-              content: Text("Gostaria realmente de remover ${cliente.nome}?"),
-              actions: [
-                TextButton(
-                  child: Text("Não"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                TextButton(
-                  child: Text("Sim"),
-                  onPressed: () {
-                    _removerCliente(cliente.id!);
-                    _refreshList();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ));
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text("Remover Cliente"),
+        content: Text("Gostaria realmente de remover ${cliente.nome}?"),
+        actions: [
+          TextButton(
+            child: Text("Não"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text("Sim"),
+            onPressed: () {
+              _removerCliente(cliente.id!);
+              _refreshList();
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   ListTile _buildItem(BuildContext context, int index) {
@@ -116,7 +126,7 @@ class _ListarClientePageState extends State<ListarClientePage> {
       subtitle: Text(cliente.sobrenome),
       onTap: () {
         _showItem(context, index);
-      }, // Adicione a vírgula aqui
+      },
       trailing: PopupMenuButton(
         itemBuilder: (context) {
           return [
@@ -130,20 +140,44 @@ class _ListarClientePageState extends State<ListarClientePage> {
           else
             _removeItem(context, index);
         },
-      ), // PopupMenuButton
-    ); // ListTile
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text("Listagem de Clientes"),
+    return Scaffold(
+      appBar: AppBar(
+        title: TextField(
+          controller: _searchController,
+          decoration: InputDecoration(
+            hintText: 'Pesquisar...',
+            prefixIcon: Icon(Icons.search),
+          ),
+          onChanged: (text) {
+            _refreshList();
+          },
         ),
-        drawer: AppDrawer(),
-        body: ListView.builder(
-          itemCount: _lista.length,
-          itemBuilder: _buildItem,
-        ));
+      ),
+      drawer: AppDrawer(),
+      body: _searchResult.isNotEmpty
+          ? Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _searchResult.length,
+                    itemBuilder: (context, index) {
+                      return _buildItem(context, index);
+                    },
+                  ),
+                ),
+              ],
+            )
+          : Container(
+              child: Center(
+                child: Text("Nenhum resultado encontrado."),
+              ),
+            ),
+    );
   }
 }
