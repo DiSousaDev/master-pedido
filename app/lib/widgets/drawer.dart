@@ -104,10 +104,9 @@ class _AppDrawerState extends State<AppDrawer> {
                 setState(() {
                   dropdownValueProduto = newValue!;
                   if (dropdownValueProduto == 'Inserir Produto') {
-                    Navigator.pushReplacementNamed(
-                        context, Routes.insertCliente);
+                    Navigator.pushReplacementNamed(context, Routes.listProduto);
                   } else if (dropdownValueProduto == 'Pesquisar Produto') {
-                    Navigator.pushReplacementNamed(context, Routes.listCliente);
+                    Navigator.pushReplacementNamed(context, Routes.listProduto);
                   }
                 });
               },
@@ -161,6 +160,16 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
+  Widget _createRouterHome() {
+    return _createDrawerItem(
+      icon: Icons.home,
+      text: 'Home',
+      onTap: () {
+        Navigator.pushReplacementNamed(context, Routes.home);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -172,6 +181,7 @@ class _AppDrawerState extends State<AppDrawer> {
           _createDropdownProduto(),
           _createDropdownPedido(),
           Divider(),
+          _createRouterHome(), // Add this line to include the home route item
           ListTile(
             title: Text('0.0.1'),
             onTap: () {},
