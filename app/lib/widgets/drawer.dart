@@ -160,6 +160,16 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
+  Widget _createRouterHome() {
+    return _createDrawerItem(
+      icon: Icons.home,
+      text: 'Home',
+      onTap: () {
+        Navigator.pushReplacementNamed(context, Routes.home);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -171,6 +181,7 @@ class _AppDrawerState extends State<AppDrawer> {
           _createDropdownProduto(),
           _createDropdownPedido(),
           Divider(),
+          _createRouterHome(), // Add this line to include the home route item
           ListTile(
             title: Text('0.0.1'),
             onTap: () {},
