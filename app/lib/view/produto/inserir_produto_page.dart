@@ -2,7 +2,7 @@ import 'package:app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class InserirProdutoPage extends StatefulWidget {
-  static const String routeName = '/insert';
+  static const String routeName = '/produto/insert';
   @override
   _InserirProdutoState createState() => _InserirProdutoState();
 }

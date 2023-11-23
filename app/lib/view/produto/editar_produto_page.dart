@@ -2,7 +2,7 @@ import 'package:app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class EditarProdutoPage extends StatefulWidget {
-  static const String routeName = '/edit';
+  static const String routeName = '/produto/edit';
   @override
   _EditarProdutoState createState() => _EditarProdutoState();
 }

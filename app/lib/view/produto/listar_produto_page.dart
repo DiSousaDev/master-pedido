@@ -4,7 +4,7 @@ import 'package:app/model/produto.dart';
 import 'package:app/widgets/drawer.dart';
 
 class ListarProdutoPage extends StatefulWidget {
-  static const String routeName = '/list';
+  static const String routeName = '/produto/list';
 
   ListarProdutoPage({super.key});
   @override

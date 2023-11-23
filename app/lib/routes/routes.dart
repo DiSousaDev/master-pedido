@@ -17,10 +17,5 @@ class Routes {
   static const String listProduto = ListarProdutoPage.routeName;
   static const String insertProduto = InserirProdutoPage.routeName;
   static const String editProduto = EditarProdutoPage.routeName;
-  static const String listProduto = ListarProdutoPage.routeName;
-  static const String insertProduto = InserirProdutoPage.routeName;
-  // static const String editProduto = EditarProdutoPage.routeName;
-  // static const String listCliente = ListarClientePage.routeName;
-  // static const String insertCliente = InserirClientePage.routeName;
-  // static const String editCliente = EditarClientePage.routeName;
+
 }
