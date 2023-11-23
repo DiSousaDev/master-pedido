@@ -104,7 +104,8 @@ class _AppDrawerState extends State<AppDrawer> {
                 setState(() {
                   dropdownValueProduto = newValue!;
                   if (dropdownValueProduto == 'Inserir Produto') {
-                    Navigator.pushReplacementNamed(context, Routes.listProduto);
+                    Navigator.pushReplacementNamed(
+                        context, Routes.insertProduto);
                   } else if (dropdownValueProduto == 'Pesquisar Produto') {
                     Navigator.pushReplacementNamed(context, Routes.listProduto);
                   }

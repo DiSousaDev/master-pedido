@@ -1,7 +1,6 @@
 import 'package:app/view/produto/editar_produto_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/model/produto.dart';
-// import 'package:app/view/produto/editar_produto_page.dart';
 import 'package:app/widgets/drawer.dart';
 
 class ListarProdutoPage extends StatefulWidget {
