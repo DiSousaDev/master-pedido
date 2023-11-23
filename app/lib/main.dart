@@ -1,4 +1,7 @@
 import 'package:app/routes/routes.dart';
+import 'package:app/view/produto/editar_produto_page.dart';
+import 'package:app/view/produto/inserir_produto_page.dart';
+import 'package:app/view/produto/listar_produto_page.dart';
 import 'package:flutter/material.dart';
 import './view/cliente/editar_cliente_page.dart';
 import './view/cliente/inserir_cliente_page.dart';
@@ -22,6 +25,9 @@ class MyApp extends StatelessWidget {
         Routes.editCliente: (context) => EditarClientePage(),
         Routes.insertCliente: (context) => InserirClientePage(),
         Routes.listCliente: (context) => ListarClientePage(),
+        Routes.editProduto: (context) => EditarProdutoPage(),
+        Routes.insertProduto: (context) => InserirProdutoPage(),
+        Routes.listProduto: (context) => ListarProdutoPage()
       },
     );
   }

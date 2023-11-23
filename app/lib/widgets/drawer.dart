@@ -99,15 +99,14 @@ class _AppDrawerState extends State<AppDrawer> {
                   Container(), // Remover a linha abaixo do DropdownButton
               value: dropdownValueProduto,
               isExpanded: true,
-
               onChanged: (String? newValue) {
                 setState(() {
                   dropdownValueProduto = newValue!;
                   if (dropdownValueProduto == 'Inserir Produto') {
                     Navigator.pushReplacementNamed(
-                        context, Routes.insertCliente);
+                        context, Routes.insertProduto);
                   } else if (dropdownValueProduto == 'Pesquisar Produto') {
-                    Navigator.pushReplacementNamed(context, Routes.listCliente);
+                    Navigator.pushReplacementNamed(context, Routes.listProduto);
                   }
                 });
               },
