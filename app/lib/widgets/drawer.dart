@@ -140,9 +140,9 @@ class _AppDrawerState extends State<AppDrawer> {
                   dropdownValuePedido = newValue!;
                   if (dropdownValuePedido == 'Inserir Pedido') {
                     Navigator.pushReplacementNamed(
-                        context, Routes.insertCliente);
+                        context, Routes.insertPedido);
                   } else if (dropdownValuePedido == 'Pesquisar Pedido') {
-                    Navigator.pushReplacementNamed(context, Routes.listCliente);
+                    Navigator.pushReplacementNamed(context, Routes.listPedido);
                   }
                 });
               },

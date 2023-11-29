@@ -1,10 +1,9 @@
 class Pedido {
   int? id;
-  String nome;
-  String cliente;
-  int data;
-  int itens;
+  String cpf;
+  int quantidade;
+  List itens;
 
-  Pedido(this.id, this.nome, this.cliente, this.data, this.itens);
-  Pedido.novo(this.nome, this.cliente, this.data, this.itens);
+  Pedido(this.id, this.cpf, this.quantidade, this.itens);
+  Pedido.novo(this.cpf, this.quantidade, this.itens);
 }
