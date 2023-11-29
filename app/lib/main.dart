@@ -1,4 +1,6 @@
 import 'package:app/routes/routes.dart';
+import 'package:app/view/pedido/inserir_pedido_page.dart';
+import 'package:app/view/pedido/listar_pedido_page.dart';
 import 'package:app/view/produto/editar_produto_page.dart';
 import 'package:app/view/produto/inserir_produto_page.dart';
 import 'package:app/view/produto/listar_produto_page.dart';
@@ -27,7 +29,9 @@ class MyApp extends StatelessWidget {
         Routes.listCliente: (context) => ListarClientePage(),
         Routes.editProduto: (context) => EditarProdutoPage(),
         Routes.insertProduto: (context) => InserirProdutoPage(),
-        Routes.listProduto: (context) => ListarProdutoPage()
+        Routes.listProduto: (context) => ListarProdutoPage(),
+        Routes.listPedido: (context) => ListarPedidoPage(),
+        Routes.insertPedido: (context) => InserirPedidoPage()
       },
     );
   }
