@@ -1,5 +1,5 @@
-import 'package:app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:app/widgets/index.dart';
 
 class InserirProdutoPage extends StatefulWidget {
   static const String routeName = '/produto/insert';
@@ -66,6 +66,7 @@ class _InserirProdutoState extends State<InserirProdutoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text("Inserir produto"),
       ),
       drawer: AppDrawer(),
@@ -75,6 +76,7 @@ class _InserirProdutoState extends State<InserirProdutoPage> {
           child: _buildForm(context),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }

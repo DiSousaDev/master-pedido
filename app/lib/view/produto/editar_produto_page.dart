@@ -1,5 +1,5 @@
-import 'package:app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:app/widgets/index.dart';
 
 class EditarProdutoPage extends StatefulWidget {
   static const String routeName = '/produto/edit';
@@ -9,18 +9,18 @@ class EditarProdutoPage extends StatefulWidget {
 
 class _EditarProdutoState extends State<EditarProdutoPage> {
   final _formKey = GlobalKey<FormState>();
-  final _descrisaoController = TextEditingController();
+  final _descricaoController = TextEditingController();
 
   @override
   void dispose() {
-    _descrisaoController.dispose();
+    _descricaoController.dispose();
     super.dispose();
   }
 
   void _salvar() async {
     // Banco de Dados para Editar um Cliente
     // Nada aqui por enquanto
-    _descrisaoController.clear();
+    _descricaoController.clear();
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Produto editado com sucesso.')));
   }
@@ -32,10 +32,10 @@ class _EditarProdutoState extends State<EditarProdutoPage> {
           child: ListView(shrinkWrap: true, children: [
             //nome
             Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Text("Descrisão:"),
+              Text("Descrição:"),
               Expanded(
                   child: TextFormField(
-                controller: _descrisaoController,
+                controller: _descricaoController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Campo não pode ser vazio';
@@ -46,6 +46,7 @@ class _EditarProdutoState extends State<EditarProdutoPage> {
             ]),
             //sobrenom
             //cpf
+            SizedBox(height: 64),
             Row(
               children: [
                 ElevatedButton(
@@ -64,12 +65,14 @@ class _EditarProdutoState extends State<EditarProdutoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text("Editar"),
       ),
       drawer: AppDrawer(),
       body: _buildForm(context),
+      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }

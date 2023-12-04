@@ -1,5 +1,5 @@
-import 'package:app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:app/widgets/index.dart';
 
 class EditarClientePage extends StatefulWidget {
   static const String routeName = '/edit';
@@ -97,12 +97,14 @@ class _EditarClienteState extends State<EditarClientePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text("Editar"),
       ),
       drawer: AppDrawer(),
       body: _buildForm(context),
+      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }

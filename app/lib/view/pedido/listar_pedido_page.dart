@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/model/pedido.dart';
-import 'package:app/widgets/drawer.dart';
+import 'package:app/routes/routes.dart';
+import 'package:app/widgets/index.dart';
 
 class ListarPedidoPage extends StatefulWidget {
   static const String routeName = '/pedido/list';
@@ -110,7 +111,7 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
   ListTile _buildItem(BuildContext context, int index) {
     Pedido pedido = _lista[index];
     return ListTile(
-      leading: Icon(Icons.pages),
+      leading: Icon(Icons.assignment),
       title: Text(pedido.cpf),
       subtitle: Text(pedido.itens.map((item) => item.toString()).join(', ')),
       onTap: () {
@@ -134,6 +135,7 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: TextField(
           controller: _searchController,
           decoration: InputDecoration(
@@ -164,6 +166,15 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
                 child: Text("Nenhum resultado encontrado."),
               ),
             ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, Routes.insertPedido);
+        },
+        tooltip: 'Adicionar pedido',
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }

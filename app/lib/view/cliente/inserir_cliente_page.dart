@@ -1,5 +1,5 @@
-import 'package:app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:app/widgets/index.dart';
 
 class InserirClientePage extends StatefulWidget {
   static const String routeName = '/insert';
@@ -81,7 +81,7 @@ class _InserirClienteState extends State<InserirClientePage> {
           ),
 
           // Espaçamento entre os campos
-          SizedBox(height: 16),
+          SizedBox(height: 64),
 
           // Botão Salvar
           ElevatedButton(
@@ -90,7 +90,7 @@ class _InserirClienteState extends State<InserirClientePage> {
                 _salvar();
               }
             },
-            child: Text('Salvar'),
+            child: Text("Salvar"),
           ),
         ],
       ),
@@ -101,6 +101,7 @@ class _InserirClienteState extends State<InserirClientePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text("Inserir Cliente"),
       ),
       drawer: AppDrawer(),
@@ -110,6 +111,7 @@ class _InserirClienteState extends State<InserirClientePage> {
           child: _buildForm(context),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }
