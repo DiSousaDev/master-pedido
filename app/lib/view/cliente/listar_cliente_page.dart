@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:app/model/cliente.dart';
+import 'package:app/routes/routes.dart';
 import 'package:app/view/cliente/editar_cliente_page.dart';
-import 'package:app/widgets/drawer.dart';
+import 'package:app/widgets/index.dart';
 
 class ListarClientePage extends StatefulWidget {
   static const String routeName = '/list';
@@ -148,6 +149,7 @@ class _ListarClientePageState extends State<ListarClientePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: TextField(
           controller: _searchController,
           decoration: InputDecoration(
@@ -178,6 +180,15 @@ class _ListarClientePageState extends State<ListarClientePage> {
                 child: Text("Nenhum resultado encontrado."),
               ),
             ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, Routes.insertCliente);
+        },
+        tooltip: 'Adicionar cliente',
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }

@@ -1,7 +1,7 @@
 class Produto {
   int? id;
-  String descrisao;
+  String descricao;
 
-  Produto(this.id, this.descrisao);
-  Produto.novo(this.descrisao);
+  Produto(this.id, this.descricao);
+  Produto.novo(this.descricao);
 }

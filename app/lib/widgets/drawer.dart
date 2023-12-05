@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:app/routes/routes.dart';
 
@@ -17,14 +16,11 @@ class _AppDrawerState extends State<AppDrawer> {
     return DrawerHeader(
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
-        decoration: BoxDecoration(
-            color: Colors.blue,
-            image: DecorationImage(
-                fit: BoxFit.fitHeight, image: AssetImage('assets/images'))),
+        decoration: BoxDecoration(color: Colors.teal),
         child: Stack(children: <Widget>[
           Positioned(
-              bottom: 12.0,
-              left: 16.0,
+              bottom: 15.0,
+              left: 15.0,
               child: Text("Menu",
                   style: TextStyle(
                       color: Colors.white,

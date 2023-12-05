@@ -1,7 +1,8 @@
 import 'package:app/view/produto/editar_produto_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/model/produto.dart';
-import 'package:app/widgets/drawer.dart';
+import 'package:app/routes/routes.dart';
+import 'package:app/widgets/index.dart';
 
 class ListarProdutoPage extends StatefulWidget {
   static const String routeName = '/produto/list';
@@ -29,7 +30,7 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
     // Se o campo de pesquisa não estiver vazio, filtra os resultados
     if (_searchController.text.isNotEmpty) {
       _searchResult = tempList.where((produto) {
-        return produto.descrisao
+        return produto.descricao
             .toLowerCase()
             .contains(_searchController.text.toLowerCase());
       }).toList();
@@ -61,10 +62,10 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(produto.descrisao),
+          title: Text(produto.descricao),
           content: Column(
             children: [
-              Text("Produto: ${produto.descrisao}"),
+              Text("Produto: ${produto.descricao}"),
             ],
           ),
           actions: [
@@ -95,7 +96,7 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: Text("Remover produto"),
-        content: Text("Gostaria realmente de remover ${produto.descrisao}?"),
+        content: Text("Gostaria realmente de remover ${produto.descricao}?"),
         actions: [
           TextButton(
             child: Text("Não"),
@@ -119,8 +120,8 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
   ListTile _buildItem(BuildContext context, int index) {
     Produto produto = _lista[index];
     return ListTile(
-      leading: Icon(Icons.inventory),
-      title: Text(produto.descrisao),
+      leading: Icon(Icons.shopping_bag),
+      title: Text(produto.descricao),
       onTap: () {
         _showItem(context, index);
       },
@@ -145,6 +146,7 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: TextField(
           controller: _searchController,
           decoration: InputDecoration(
@@ -175,6 +177,15 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
                 child: Text("Nenhum resultado encontrado."),
               ),
             ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, Routes.insertProduto);
+        },
+        tooltip: 'Adicionar produto',
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }
