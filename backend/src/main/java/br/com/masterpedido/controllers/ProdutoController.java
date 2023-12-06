@@ -49,6 +49,7 @@ public class ProdutoController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ProdutoFullDTO>> buscarTodosProdutos() {
+        System.out.println("Buscar Todos os Produtos...");
         return ResponseEntity.ok(produtoService.listarTodos());
     }
 

@@ -1,13 +1,17 @@
+import 'package:app/repository/produto_repository.dart';
 import 'package:app/view/produto/editar_produto_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/model/produto.dart';
 import 'package:app/routes/routes.dart';
 import 'package:app/widgets/index.dart';
 
+import '../../service/error/error.dart';
+
 class ListarProdutoPage extends StatefulWidget {
   static const String routeName = '/produto/list';
 
   ListarProdutoPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _ListarProdutoPageState();
 }
@@ -43,16 +47,27 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
     });
   }
 
+  // Future<List<Produto>> _obterTodos() async {
+  //   // Simulando dados do banco de dados
+  //   return <Produto>[
+  //     Produto(1, "Lápis 2B"),
+  //     Produto(2, "Papel A4"),
+  //     Produto(3, "Caneta BIC Preta")
+  //   ];
+  // }
+
   Future<List<Produto>> _obterTodos() async {
-    // Simulando dados do banco de dados
-    return <Produto>[
-      Produto(1, "Lápis 2B"),
-      Produto(2, "Papel A4"),
-      Produto(3, "Caneta BIC Preta")
-    ];
+    List<Produto> tempLista = <Produto>[];
+    try {
+      ProdutoRepository repository = ProdutoRepository();
+      tempLista = await repository.buscarTodos();
+    } catch (exception) {
+      showError(context, "Erro obtendo lista de produtos", exception.toString());
+    }
+    return tempLista;
   }
 
-  void _removerProduto(int id) {
+  void _removerProduto(num id) {
     // Implementar a lógica de remoção do cliente
   }
 
@@ -86,7 +101,7 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
     Navigator.pushNamed(
       context,
       EditarProdutoPage.routeName,
-      arguments: <String, int>{"id": produto.id!},
+      arguments: <String, num>{"id": produto.id!},
     );
   }
 
