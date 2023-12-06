@@ -10,21 +10,21 @@ class InserirProdutoPage extends StatefulWidget {
 
 class _InserirProdutoState extends State<InserirProdutoPage> {
   final _formKey = GlobalKey<FormState>();
-  final _descrisaoController = TextEditingController();
+  final _descricaoController = TextEditingController();
 
   @override
   void dispose() {
-    _descrisaoController.dispose();
+    _descricaoController.dispose();
     super.dispose();
   }
 
   void _salvar() async {
     // Banco de Dados para Inserir um Produto
     // Nada aqui por enquanto
-    _descrisaoController.clear();
+    _descricaoController.clear();
 
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Produto salvo com sucesso.')));
+        .showSnackBar(SnackBar(content: Text('Produto salvo com sucesso!')));
   }
 
   Widget _buildForm(BuildContext context) {
@@ -35,8 +35,8 @@ class _InserirProdutoState extends State<InserirProdutoPage> {
         children: [
           // Descrição
           TextFormField(
-            controller: _descrisaoController,
-            decoration: InputDecoration(labelText: 'Descrição'),
+            controller: _descricaoController,
+            decoration: InputDecoration(labelText: 'Nome do produto'),
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Campo não pode ser vazio';
@@ -67,7 +67,7 @@ class _InserirProdutoState extends State<InserirProdutoPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Text("Inserir produto"),
+        title: Text("Novo produto"),
       ),
       drawer: AppDrawer(),
       body: SingleChildScrollView(

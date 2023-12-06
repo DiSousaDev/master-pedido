@@ -45,9 +45,11 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
   Future<List<Pedido>> _obterTodos() async {
     // Simulando dados do banco de dados
     return <Pedido>[
-      Pedido(1, "813095713807", 1, ['Caneta preta']),
-      Pedido(2, "913045713807", 1, ['Lápis de cor 32 cores']),
-      Pedido(3, "833095714807", 1, ['Caneta vermelha', 'Papel A4']),
+      Pedido(1, "813095713807", '13/08/2023 22:31', 1, ['Caneta preta']),
+      Pedido(
+          2, "913045713807", '09/11/2023 09:11', 1, ['Lápis de cor 32 cores']),
+      Pedido(3, "833095714807", '22/09/2023 08:51', 1,
+          ['Caneta vermelha', 'Papel A4']),
     ];
   }
 
@@ -64,6 +66,7 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
           title: Text(pedido.itens as String),
           content: Column(
             children: [
+              Text("Data: ${pedido.data}"),
               Text("CPF: ${pedido.cpf}"),
               Text("Quantidade: ${pedido.quantidade}"),
             ],
@@ -86,20 +89,20 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: Text("Remover Pedido"),
-        content: Text("Gostaria realmente de remover ${pedido.id}?"),
+        title: Text("Remover pedido"),
+        content: Text("Gostaria realmente de remover o pedido ${pedido.id}?"),
         actions: [
-          TextButton(
-            child: Text("Não"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
           TextButton(
             child: Text("Sim"),
             onPressed: () {
               _removerPedido(pedido.id!);
               _refreshList();
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text("Não"),
+            onPressed: () {
               Navigator.of(context).pop();
             },
           ),
@@ -113,14 +116,16 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
     return ListTile(
       leading: Icon(Icons.assignment),
       title: Text(pedido.cpf),
-      subtitle: Text(pedido.itens.map((item) => item.toString()).join(', ')),
+      subtitle: Text(pedido.data +
+          ' - ' +
+          pedido.itens.map((item) => item.toString()).join(', ')),
       onTap: () {
         _showItem(context, index);
       },
       trailing: PopupMenuButton(
         itemBuilder: (context) {
           return [
-            PopupMenuItem(value: 'edit', child: Text('Editar')),
+            // PopupMenuItem(value: 'edit', child: Text('Editar')),
             PopupMenuItem(value: 'delete', child: Text('Remover')),
           ];
         },
@@ -139,7 +144,7 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
         title: TextField(
           controller: _searchController,
           decoration: InputDecoration(
-            hintText: 'Pesquisar...',
+            hintText: 'Digite o CPF do cliente',
             prefixIcon: Icon(Icons.search),
           ),
           onChanged: (text) {
@@ -163,14 +168,14 @@ class _ListarPedidoPageState extends State<ListarPedidoPage> {
             )
           : Container(
               child: Center(
-                child: Text("Nenhum resultado encontrado."),
+                child: Text("Nenhum resultado encontrado"),
               ),
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushReplacementNamed(context, Routes.insertPedido);
         },
-        tooltip: 'Adicionar pedido',
+        tooltip: 'Adicionar novo pedido',
         backgroundColor: Colors.teal,
         child: const Icon(Icons.add),
       ),

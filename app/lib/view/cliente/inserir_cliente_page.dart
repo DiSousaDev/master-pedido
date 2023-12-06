@@ -102,14 +102,12 @@ class _InserirClienteState extends State<InserirClientePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Text("Inserir Cliente"),
+        title: Text("Adicionar novo cliente"),
       ),
       drawer: AppDrawer(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: _buildForm(context),
-        ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: _buildForm(context),
       ),
       bottomNavigationBar: BottomNavigationBarWidget(),
     );

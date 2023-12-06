@@ -32,67 +32,68 @@ class _EditarClienteState extends State<EditarClientePage> {
   }
 
   Widget _buildForm(BuildContext context) {
-    return Column(children: [
-      Form(
-          key: _formKey,
-          child: ListView(shrinkWrap: true, children: [
-            //nome
-            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Text("Nome:"),
-              Expanded(
-                  child: TextFormField(
-                controller: _nomeController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Campo não pode ser vazio';
-                  }
-                  return null;
-                },
-              ))
-            ]),
-            //sobrenome
-            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Text("Sobrenome:"),
-              Expanded(
-                  child: TextFormField(
-                controller: _sobrenomeController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Campo não pode ser vazio';
-                  }
-                  return null;
-                },
-              ))
-            ]),
-            //cpf
-            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Text("CPF:"),
-              Expanded(
-                  child: TextFormField(
-                controller: _cpfController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Campo não pode ser vazio';
-                  }
-                  return null;
-                },
-              ))
-            ]),
-            //botao salvar
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _salvar();
-                    }
-                  },
-                  child: Text('Editar'),
-                ),
-              ],
-            )
-          ])) // Form
-    ]);
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Nome
+          TextFormField(
+            controller: _nomeController,
+            decoration: InputDecoration(labelText: 'Nome'),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Campo não pode ser vazio';
+              }
+              return null;
+            },
+          ),
+
+          // Espaçamento entre os campos
+          SizedBox(height: 16),
+
+          // Sobrenome
+          TextFormField(
+            controller: _sobrenomeController,
+            decoration: InputDecoration(labelText: 'Sobrenome'),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Campo não pode ser vazio';
+              }
+              return null;
+            },
+          ),
+
+          // Espaçamento entre os campos
+          SizedBox(height: 16),
+
+          // CPF
+          TextFormField(
+            controller: _cpfController,
+            decoration: InputDecoration(labelText: 'CPF'),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Campo não pode ser vazio';
+              }
+              return null;
+            },
+          ),
+
+          // Espaçamento entre os campos
+          SizedBox(height: 64),
+
+          // Botão Salvar
+          ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _salvar();
+              }
+            },
+            child: Text("Salvar"),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

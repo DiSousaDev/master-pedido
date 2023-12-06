@@ -3,6 +3,7 @@ import 'package:app/widgets/index.dart';
 
 class EditarProdutoPage extends StatefulWidget {
   static const String routeName = '/produto/edit';
+
   @override
   _EditarProdutoState createState() => _EditarProdutoState();
 }
@@ -21,46 +22,44 @@ class _EditarProdutoState extends State<EditarProdutoPage> {
     // Banco de Dados para Editar um Cliente
     // Nada aqui por enquanto
     _descricaoController.clear();
+
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Produto editado com sucesso.')));
+        .showSnackBar(SnackBar(content: Text('Produto editado com sucesso!')));
   }
 
   Widget _buildForm(BuildContext context) {
-    return Column(children: [
-      Form(
-          key: _formKey,
-          child: ListView(shrinkWrap: true, children: [
-            //nome
-            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Text("Descrição:"),
-              Expanded(
-                  child: TextFormField(
-                controller: _descricaoController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Campo não pode ser vazio';
-                  }
-                  return null;
-                },
-              ))
-            ]),
-            //sobrenom
-            //cpf
-            SizedBox(height: 64),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _salvar();
-                    }
-                  },
-                  child: Text('Editar'),
-                ),
-              ],
-            )
-          ])) // Form
-    ]);
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Descrição
+          TextFormField(
+            controller: _descricaoController,
+            decoration: InputDecoration(labelText: 'Nome do produto'),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Campo não pode ser vazio';
+              }
+              return null;
+            },
+          ),
+
+          // Espaçamento entre os campos
+          SizedBox(height: 16),
+
+          // Botão Salvar
+          ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _salvar();
+              }
+            },
+            child: Text('Salvar'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -68,10 +67,15 @@ class _EditarProdutoState extends State<EditarProdutoPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Text("Editar"),
+        title: Text("Editar produto"),
       ),
       drawer: AppDrawer(),
-      body: _buildForm(context),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: _buildForm(context),
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }

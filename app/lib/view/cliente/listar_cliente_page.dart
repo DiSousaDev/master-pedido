@@ -56,33 +56,6 @@ class _ListarClientePageState extends State<ListarClientePage> {
     // Implementar a lógica de remoção do cliente
   }
 
-  void _showItem(BuildContext context, int index) {
-    Cliente cliente = _lista[index];
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(cliente.nome),
-          content: Column(
-            children: [
-              Text("Nome: ${cliente.nome}"),
-              Text("Sobrenome: ${cliente.sobrenome}"),
-              Text("CPF: ${cliente.cpf}"),
-            ],
-          ),
-          actions: [
-            TextButton(
-              child: Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop(); // Fecha a dialog
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void _editItem(BuildContext context, int index) {
     Cliente cliente = _lista[index];
     Navigator.pushNamed(
@@ -101,16 +74,16 @@ class _ListarClientePageState extends State<ListarClientePage> {
         content: Text("Gostaria realmente de remover ${cliente.nome}?"),
         actions: [
           TextButton(
-            child: Text("Não"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
             child: Text("Sim"),
             onPressed: () {
               _removerCliente(cliente.id!);
               _refreshList();
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text("Não"),
+            onPressed: () {
               Navigator.of(context).pop();
             },
           ),
@@ -123,11 +96,8 @@ class _ListarClientePageState extends State<ListarClientePage> {
     Cliente cliente = _lista[index];
     return ListTile(
       leading: Icon(Icons.people),
-      title: Text(cliente.nome),
-      subtitle: Text(cliente.sobrenome),
-      onTap: () {
-        _showItem(context, index);
-      },
+      title: Text(cliente.nome + ' ' + cliente.sobrenome),
+      subtitle: Text(cliente.cpf),
       trailing: PopupMenuButton(
         itemBuilder: (context) {
           return [
@@ -153,7 +123,7 @@ class _ListarClientePageState extends State<ListarClientePage> {
         title: TextField(
           controller: _searchController,
           decoration: InputDecoration(
-            hintText: 'Pesquisar...',
+            hintText: 'Digite o CPF do cliente',
             prefixIcon: Icon(Icons.search),
           ),
           onChanged: (text) {
@@ -177,14 +147,14 @@ class _ListarClientePageState extends State<ListarClientePage> {
             )
           : Container(
               child: Center(
-                child: Text("Nenhum resultado encontrado."),
+                child: Text("Nenhum resultado encontrado"),
               ),
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushReplacementNamed(context, Routes.insertCliente);
         },
-        tooltip: 'Adicionar cliente',
+        tooltip: 'Adicionar novo cliente',
         backgroundColor: Colors.teal,
         child: const Icon(Icons.add),
       ),
