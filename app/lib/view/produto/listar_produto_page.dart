@@ -150,7 +150,7 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
         title: TextField(
           controller: _searchController,
           decoration: InputDecoration(
-            hintText: 'Pesquisar...',
+            hintText: 'Pesquisar produto',
             prefixIcon: Icon(Icons.search),
           ),
           onChanged: (text) {

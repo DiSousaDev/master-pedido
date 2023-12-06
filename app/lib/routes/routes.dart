@@ -1,7 +1,7 @@
 import 'package:app/main.dart';
 import '/view/produto/index.dart';
-import '../view/cliente/index.dart';
-import '../view/pedido/index.dart';
+import '/view/cliente/index.dart';
+import '/view/pedido/index.dart';
 
 class Routes {
   static const String home = MyHomePage.routeName;

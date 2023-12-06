@@ -62,16 +62,19 @@ class _AppDrawerState extends State<AppDrawer> {
               onChanged: (String? newValue) {
                 setState(() {
                   dropdownValueCliente = newValue!;
-                  if (dropdownValueCliente == 'Inserir Cliente') {
+                  if (dropdownValueCliente == 'Adicionar novo cliente') {
                     Navigator.pushReplacementNamed(
                         context, Routes.insertCliente);
-                  } else if (dropdownValueCliente == 'Listar Cliente') {
+                  } else if (dropdownValueCliente == 'Pesquisar cliente') {
                     Navigator.pushReplacementNamed(context, Routes.listCliente);
                   }
                 });
               },
-              items: <String>['Cliente', 'Inserir Cliente', 'Listar Cliente']
-                  .map<DropdownMenuItem<String>>((String value) {
+              items: <String>[
+                'Cliente',
+                'Adicionar novo cliente',
+                'Pesquisar cliente'
+              ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -98,16 +101,19 @@ class _AppDrawerState extends State<AppDrawer> {
               onChanged: (String? newValue) {
                 setState(() {
                   dropdownValueProduto = newValue!;
-                  if (dropdownValueProduto == 'Inserir Produto') {
+                  if (dropdownValueProduto == 'Adicionar novo produto') {
                     Navigator.pushReplacementNamed(
                         context, Routes.insertProduto);
-                  } else if (dropdownValueProduto == 'Pesquisar Produto') {
+                  } else if (dropdownValueProduto == 'Pesquisar produto') {
                     Navigator.pushReplacementNamed(context, Routes.listProduto);
                   }
                 });
               },
-              items: <String>['Produto', 'Inserir Produto', 'Pesquisar Produto']
-                  .map<DropdownMenuItem<String>>((String value) {
+              items: <String>[
+                'Produto',
+                'Adicionar novo produto',
+                'Pesquisar produto'
+              ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -134,16 +140,19 @@ class _AppDrawerState extends State<AppDrawer> {
               onChanged: (String? newValue) {
                 setState(() {
                   dropdownValuePedido = newValue!;
-                  if (dropdownValuePedido == 'Inserir Pedido') {
+                  if (dropdownValuePedido == 'Adicionar novo pedido') {
                     Navigator.pushReplacementNamed(
                         context, Routes.insertPedido);
-                  } else if (dropdownValuePedido == 'Pesquisar Pedido') {
+                  } else if (dropdownValuePedido == 'Pesquisar pedido') {
                     Navigator.pushReplacementNamed(context, Routes.listPedido);
                   }
                 });
               },
-              items: <String>['Pedido', 'Inserir Pedido', 'Pesquisar Pedido']
-                  .map<DropdownMenuItem<String>>((String value) {
+              items: <String>[
+                'Pedido',
+                'Adicionar novo pedido',
+                'Pesquisar pedido'
+              ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -159,7 +168,7 @@ class _AppDrawerState extends State<AppDrawer> {
   Widget _createRouterHome() {
     return _createDrawerItem(
       icon: Icons.home,
-      text: 'Home',
+      text: 'Início',
       onTap: () {
         Navigator.pushReplacementNamed(context, Routes.home);
       },
