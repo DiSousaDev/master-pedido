@@ -154,7 +154,7 @@ class _ListarClientePageState extends State<ListarClientePage> {
         onPressed: () {
           Navigator.pushReplacementNamed(context, Routes.insertCliente);
         },
-        tooltip: 'Adicionar cliente',
+        tooltip: 'Adicionar novo cliente',
         backgroundColor: Colors.teal,
         child: const Icon(Icons.add),
       ),

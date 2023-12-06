@@ -181,7 +181,7 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
         onPressed: () {
           Navigator.pushReplacementNamed(context, Routes.insertProduto);
         },
-        tooltip: 'Adicionar produto',
+        tooltip: 'Adicionar novo produto',
         backgroundColor: Colors.teal,
         child: const Icon(Icons.add),
       ),

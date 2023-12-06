@@ -102,7 +102,7 @@ class _InserirClienteState extends State<InserirClientePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Text("Inserir Cliente"),
+        title: Text("Adicionar novo cliente"),
       ),
       drawer: AppDrawer(),
       body: Padding(
