@@ -16,6 +16,8 @@ public interface ClienteService {
 
     Page<ClienteFullDTO> listarTodos(Pageable pageable);
 
+    List<ClienteFullDTO> listarTodos();
+
     List<ClienteFullDTO> buscarContendoCpf(String cpf);
 
     ClienteFullDTO salvar(ClienteRequest clienteRequest);

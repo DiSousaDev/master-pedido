@@ -48,6 +48,11 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.listarTodos(pageable));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<ClienteFullDTO>> buscarTodos() {
+        return ResponseEntity.ok(clienteService.listarTodos());
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<ClienteFullDTO> buscarPorId(@PathVariable Integer id) {
         System.out.println("LISTANDO CLIENTE ID: " + id);

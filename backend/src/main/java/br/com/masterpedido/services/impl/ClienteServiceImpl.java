@@ -60,6 +60,12 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    public List<ClienteFullDTO> listarTodos() {
+        log.info("Listando todos os clientes");
+        return repository.findAll().stream().map(ClienteFullDTO::new).toList();
+    }
+
+    @Override
     public List<ClienteFullDTO> buscarContendoCpf(String cpf) {
         return repository.findByCpfContains(cpf).stream().map(ClienteFullDTO::new).toList();
     }
