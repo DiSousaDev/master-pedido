@@ -1,5 +1,8 @@
+import 'package:app/repository/cliente_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widgets/index.dart';
+
+import '../../model/cliente.dart';
 
 class InserirClientePage extends StatefulWidget {
   static const String routeName = '/insert';
@@ -23,13 +26,30 @@ class _InserirClienteState extends State<InserirClientePage> {
   }
 
   void _salvar() async {
-    // Banco de Dados para Inserir um Cliente
-    // Nada aqui por enquanto
-    _nomeController.clear();
-    _sobrenomeController.clear();
-    _cpfController.clear();
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Cliente salvo com sucesso.')));
+    if (_formKey.currentState!.validate()) {
+      final nome = _nomeController.text;
+      final sobrenome = _sobrenomeController.text;
+      final cpf = _cpfController.text;
+      final novoCliente = Cliente.novo(nome, sobrenome, cpf);
+
+      try {
+        ClienteRepository repository = ClienteRepository();
+        final clienteInserido = await repository.inserir(novoCliente);
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Cliente salvo com sucesso! ID: ${clienteInserido.id}'),
+        ));
+        Navigator.pushReplacementNamed(context, '/list');
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Erro ao salvar o cliente: $e'),
+          backgroundColor: Colors.red,
+        ));
+      }
+      _nomeController.clear();
+      _sobrenomeController.clear();
+      _cpfController.clear();
+    }
   }
 
   Widget _buildForm(BuildContext context) {

@@ -4,6 +4,9 @@ import 'package:app/routes/routes.dart';
 import 'package:app/view/cliente/editar_cliente_page.dart';
 import 'package:app/widgets/index.dart';
 
+import '../../repository/cliente_repository.dart';
+import '../../service/error/error.dart';
+
 class ListarClientePage extends StatefulWidget {
   static const String routeName = '/list';
 
@@ -30,7 +33,7 @@ class _ListarClientePageState extends State<ListarClientePage> {
     // Se o campo de pesquisa não estiver vazio, filtra os resultados
     if (_searchController.text.isNotEmpty) {
       _searchResult = tempList.where((cliente) {
-        return cliente.nome
+        return cliente.cpf
             .toLowerCase()
             .contains(_searchController.text.toLowerCase());
       }).toList();
@@ -44,16 +47,30 @@ class _ListarClientePageState extends State<ListarClientePage> {
   }
 
   Future<List<Cliente>> _obterTodos() async {
-    // Simulando dados do banco de dados
-    return <Cliente>[
-      Cliente(1, "Geraldo", "Silva", '813095713807'),
-      Cliente(2, "Gustavo", "Costa", '928492460924'),
-      Cliente(3, "Milene", "Oliveira", '9284935901953'),
-    ];
+    List<Cliente> tempLista = <Cliente>[];
+    try {
+      ClienteRepository repository = ClienteRepository();
+      tempLista = await repository.buscarTodos();
+    } catch (exception) {
+      showError(context, "Erro obtendo lista de clientes", exception.toString());
+    }
+    return tempLista;
   }
 
-  void _removerCliente(int id) {
-    // Implementar a lógica de remoção do cliente
+  void _removerCliente(num id) {
+    try {
+      ClienteRepository repository = ClienteRepository();
+      repository.remover(id).then((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Cliente removido com sucesso!')),
+        );
+        _refreshList();
+      }).catchError((error) {
+        showError(context, 'Erro ao remover o cliente', error.toString());
+      });
+    } catch (exception) {
+      showError(context, 'Erro ao remover o cliente', exception.toString());
+    }
   }
 
   void _editItem(BuildContext context, int index) {
@@ -61,8 +78,15 @@ class _ListarClientePageState extends State<ListarClientePage> {
     Navigator.pushNamed(
       context,
       EditarClientePage.routeName,
-      arguments: <String, int>{"id": cliente.id!},
-    );
+      arguments: {
+        "id": cliente.id!,
+        "nome": cliente.nome,
+        "sobrenome": cliente.sobrenome,
+        "cpf": cliente.cpf,
+      },
+    ).then((_) {
+      _refreshList();
+    });
   }
 
   void _removeItem(BuildContext context, int index) {

@@ -22,7 +22,6 @@ class _InserirProdutoState extends State<InserirProdutoPage> {
   }
 
   void _salvar() async {
-
     if (_formKey.currentState!.validate()) {
       final descricao = _descricaoController.text;
       final novoProduto = Produto.novo(descricao);
