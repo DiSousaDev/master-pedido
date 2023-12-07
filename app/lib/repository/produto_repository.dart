@@ -20,7 +20,7 @@ class ProdutoRepository {
     return await api.alterar(produto);
   }
 
-  Future<Produto> remover(int id) async {
+  Future<void> remover(num id) async {
     return await api.remover(id);
   }
 }

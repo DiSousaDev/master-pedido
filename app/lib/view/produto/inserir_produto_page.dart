@@ -1,5 +1,8 @@
+import 'package:app/repository/produto_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widgets/index.dart';
+
+import '../../model/produto.dart';
 
 class InserirProdutoPage extends StatefulWidget {
   static const String routeName = '/produto/insert';
@@ -19,12 +22,27 @@ class _InserirProdutoState extends State<InserirProdutoPage> {
   }
 
   void _salvar() async {
-    // Banco de Dados para Inserir um Produto
-    // Nada aqui por enquanto
-    _descricaoController.clear();
 
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Produto salvo com sucesso!')));
+    if (_formKey.currentState!.validate()) {
+      final descricao = _descricaoController.text;
+      final novoProduto = Produto.novo(descricao);
+
+      try {
+        ProdutoRepository repository = ProdutoRepository();
+        final produtoInserido = await repository.inserir(novoProduto);
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Produto salvo com sucesso! ID: ${produtoInserido.id}'),
+        ));
+        Navigator.pushReplacementNamed(context, '/produto/list');
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Erro ao salvar o produto: $e'),
+          backgroundColor: Colors.red,
+        ));
+      }
+      _descricaoController.clear();
+    }
   }
 
   Widget _buildForm(BuildContext context) {

@@ -24,7 +24,8 @@ class Produto {
   static Produto fromJson(String j) => Produto.fromMap(jsonDecode(j));
 
   static List<Produto> fromJsonList(String j) {
-    final parsed = jsonDecode(j).cast<Map<String, dynamic>>();
+    final utf8Json = utf8.decode(j.codeUnits);
+    final parsed = jsonDecode(utf8Json).cast<Map<String, dynamic>>();
     return parsed.map<Produto>((map) => Produto.fromMap(map)).toList();
   }
 

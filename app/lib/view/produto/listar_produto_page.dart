@@ -30,7 +30,6 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
 
   void _refreshList() async {
     List<Produto> tempList = await _obterTodos();
-
     // Se o campo de pesquisa não estiver vazio, filtra os resultados
     if (_searchController.text.isNotEmpty) {
       _searchResult = tempList.where((produto) {
@@ -47,15 +46,6 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
     });
   }
 
-  // Future<List<Produto>> _obterTodos() async {
-  //   // Simulando dados do banco de dados
-  //   return <Produto>[
-  //     Produto(1, "Lápis 2B"),
-  //     Produto(2, "Papel A4"),
-  //     Produto(3, "Caneta BIC Preta")
-  //   ];
-  // }
-
   Future<List<Produto>> _obterTodos() async {
     List<Produto> tempLista = <Produto>[];
     try {
@@ -68,7 +58,19 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
   }
 
   void _removerProduto(num id) {
-    // Implementar a lógica de remoção do cliente
+    try {
+      ProdutoRepository repository = ProdutoRepository();
+      repository.remover(id).then((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Produto removido com sucesso!')),
+        );
+        _refreshList();
+      }).catchError((error) {
+        showError(context, 'Erro ao remover o produto', error.toString());
+      });
+    } catch (exception) {
+      showError(context, 'Erro ao remover o produto', exception.toString());
+    }
   }
 
   void _showItem(BuildContext context, int index) {
@@ -101,8 +103,13 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
     Navigator.pushNamed(
       context,
       EditarProdutoPage.routeName,
-      arguments: <String, num>{"id": produto.id!},
-    );
+      arguments: {
+        "id": produto.id!,
+        "nome": produto.descricao,
+      },
+    ).then((_) {
+      _refreshList();
+    });
   }
 
   void _removeItem(BuildContext context, int index) {

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:app/widgets/index.dart';
 
+import '../../model/produto.dart';
+import '../../repository/produto_repository.dart';
+import '../../service/error/error.dart';
+
 class EditarProdutoPage extends StatefulWidget {
   static const String routeName = '/produto/edit';
 
@@ -10,7 +14,23 @@ class EditarProdutoPage extends StatefulWidget {
 
 class _EditarProdutoState extends State<EditarProdutoPage> {
   final _formKey = GlobalKey<FormState>();
-  final _descricaoController = TextEditingController();
+  late TextEditingController _descricaoController;
+
+  num? productId;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final Map<String, dynamic> args =
+    ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    productId = args['id'] as num?;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _descricaoController = TextEditingController();
+  }
 
   @override
   void dispose() {
@@ -19,12 +39,47 @@ class _EditarProdutoState extends State<EditarProdutoPage> {
   }
 
   void _salvar() async {
-    // Banco de Dados para Editar um Cliente
-    // Nada aqui por enquanto
-    _descricaoController.clear();
+    if (_formKey.currentState!.validate()) {
+      String novoNome = _descricaoController.text;
 
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Produto editado com sucesso!')));
+      Produto produtoEditado = Produto(productId, novoNome);
+
+      try {
+        ProdutoRepository repository = ProdutoRepository();
+        await repository.alterar(produtoEditado);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Produto editado com sucesso!')),
+        );
+        Navigator.popUntil(context, ModalRoute.withName('/produto/list'));
+      } catch (error) {
+        showError(context, 'Erro ao editar o produto', error.toString());
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Map<String, dynamic> args =
+    ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final String nomeProduto = args['nome'] as String;
+
+    _descricaoController.text = nomeProduto;
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        title: Text("Editar produto"),
+      ),
+      drawer: AppDrawer(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: _buildForm(context),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBarWidget(),
+    );
   }
 
   Widget _buildForm(BuildContext context) {
@@ -44,11 +99,7 @@ class _EditarProdutoState extends State<EditarProdutoPage> {
               return null;
             },
           ),
-
-          // Espaçamento entre os campos
           SizedBox(height: 16),
-
-          // Botão Salvar
           ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
@@ -59,24 +110,6 @@ class _EditarProdutoState extends State<EditarProdutoPage> {
           ),
         ],
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: Text("Editar produto"),
-      ),
-      drawer: AppDrawer(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: _buildForm(context),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }

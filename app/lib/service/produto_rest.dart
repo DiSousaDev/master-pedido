@@ -55,14 +55,14 @@ class ProdutoRest {
     }
   }
 
-  Future<Produto> remover(int id) async {
+  Future<void> remover(num id) async {
     final http.Response response = await http.delete(
         Uri.http(API.endpoint, '/produtos/$id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         });
-    if (response.statusCode == 200) {
-      return Produto.fromJson(response.body);
+    if (response.statusCode == 204) {
+      return;
     } else {
       throw Exception('Erro ao remover produto: [$id].');
     }
