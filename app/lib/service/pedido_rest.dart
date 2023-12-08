@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 class PedidoRest {
   Future<PedidoResponse> inserir(PedidoRequest pedido) async {
     final http.Response response =
-        await http.post(Uri.http(API.endpoint, 'pedidos'),
+        await http.post(Uri.http(API.endpoint, '/pedidos'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
@@ -16,7 +16,7 @@ class PedidoRest {
     if (response.statusCode == 201) {
       return PedidoResponse.fromJson(response.body);
     } else {
-      throw Exception('Erro ao inserir produto.');
+      throw Exception('Erro ao inserir pedido.');
     }
   }
 }

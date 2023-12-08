@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app/model/cliente.dart';
 
 class PedidoResponse {
@@ -14,4 +16,21 @@ class PedidoResponse {
       'cliente': cliente.toJson(),
     };
   }
+
+  static PedidoResponse fromMap(Map<String, dynamic> map) {
+    return PedidoResponse(
+        map['idPedido'],
+        map['data'],
+        Cliente.fromMap(map['cliente'])
+    );
+  }
+
+  static List<PedidoResponse> fromMaps(List<Map<String, dynamic>> maps) {
+    return List.generate(maps.length, (i) {
+      return PedidoResponse.fromMap(maps[i]);
+    });
+  }
+
+  static PedidoResponse fromJson(String j) => PedidoResponse.fromMap(jsonDecode(j));
+
 }
