@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import '../model/cliente.dart';
 
 class ClienteRest {
-
   Future<List<Cliente>> buscarTodos() async {
     final http.Response response =
         await http.get(Uri.http(API.endpoint, "clientes/all"));
@@ -19,11 +18,11 @@ class ClienteRest {
 
   Future<Cliente> inserir(Cliente cliente) async {
     final http.Response response =
-    await http.post(Uri.http(API.endpoint, 'clientes'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: cliente.toJson());
+        await http.post(Uri.http(API.endpoint, 'clientes'),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: cliente.toJson());
     if (response.statusCode == 201) {
       return Cliente.fromJson(response.body);
     } else {
@@ -54,9 +53,11 @@ class ClienteRest {
         });
     if (response.statusCode == 204) {
       return;
+    } else if (response.statusCode == 400) {
+      throw Exception(
+          'O cliente não pôde ser excluído pois está atrelado a um ou mais pedidos');
     } else {
-      throw Exception('Erro ao remover cliente: [$id].');
+      throw Exception('Erro ao excluir cliente');
     }
   }
-
 }

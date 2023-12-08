@@ -22,7 +22,7 @@ class ProdutoRest {
     if (response.statusCode == 200) {
       return Produto.fromJsonList(response.body);
     } else {
-      throw Exception('Erro ao buscar todos os produtos.');
+      throw Exception('Erro ao buscar todos os produtos');
     }
   }
 
@@ -36,7 +36,7 @@ class ProdutoRest {
     if (response.statusCode == 201) {
       return Produto.fromJson(response.body);
     } else {
-      throw Exception('Erro ao inserir produto.');
+      throw Exception('Erro ao inserir produto');
     }
   }
 
@@ -63,8 +63,11 @@ class ProdutoRest {
         });
     if (response.statusCode == 204) {
       return;
+    } else if (response.statusCode == 400) {
+      throw Exception(
+          'O produto não pôde ser excluído pois está atrelado a um ou mais pedidos');
     } else {
-      throw Exception('Erro ao remover produto: [$id].');
+      throw Exception('Erro ao excluir produto');
     }
   }
 }

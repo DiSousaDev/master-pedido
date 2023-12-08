@@ -16,7 +16,7 @@ class PedidoRest {
     if (response.statusCode == 201) {
       return PedidoResponse.fromJson(response.body);
     } else {
-      throw Exception('Erro ao inserir pedido.');
+      throw Exception('Erro ao inserir pedido');
     }
   }
 }
