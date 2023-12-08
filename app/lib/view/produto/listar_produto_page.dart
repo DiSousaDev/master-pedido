@@ -52,7 +52,8 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
       ProdutoRepository repository = ProdutoRepository();
       tempLista = await repository.buscarTodos();
     } catch (exception) {
-      showError(context, "Erro obtendo lista de produtos", exception.toString());
+      showError(
+          context, "Erro obtendo lista de produtos", exception.toString());
     }
     return tempLista;
   }
@@ -121,16 +122,16 @@ class _ListarProdutoPageState extends State<ListarProdutoPage> {
         content: Text("Gostaria realmente de remover ${produto.descricao}?"),
         actions: [
           TextButton(
-            child: Text("Não"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
             child: Text("Sim"),
             onPressed: () {
               _removerProduto(produto.id!);
               _refreshList();
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text("Não"),
+            onPressed: () {
               Navigator.of(context).pop();
             },
           ),
