@@ -1,5 +1,13 @@
+import 'package:app/model/pedido-request.dart';
+import 'package:app/model/produto.dart';
+import 'package:app/repository/produto_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:app/widgets/index.dart';
+
+import '../../model/item-pedido.dart';
+import '../../model/produto-pedido.dart';
+import '../../repository/pedido_repository.dart';
+import '../../widgets/bottom_navigation_bar.dart';
+import '../../widgets/drawer.dart';
 
 class InserirPedidoPage extends StatefulWidget {
   static const String routeName = '/pedido/insert';
@@ -10,26 +18,68 @@ class InserirPedidoPage extends StatefulWidget {
 
 class _InserirPedidoState extends State<InserirPedidoPage> {
   final _formKey = GlobalKey<FormState>();
+  List<Produto> listaDeProdutos = [];
+  Produto? _produtoSelecionado;
   final _cpfController = TextEditingController();
   final _quantidadeController = TextEditingController();
-  final _itensController = TextEditingController();
+  List<ItemPedido> listaItens = [];
+
+  final ProdutoRepository produtoRepository = ProdutoRepository();
 
   @override
-  void dispose() {
-    _cpfController.dispose();
-    _quantidadeController.dispose();
-    _itensController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    carregarProdutos();
   }
 
-  void _salvar() async {
-    // Banco de Dados para Inserir um Produto
-    // Nada aqui por enquanto
-    _cpfController.clear();
-    _quantidadeController.clear();
-    _itensController.clear();
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Pedido salvo com sucesso.')));
+  Future<void> carregarProdutos() async {
+    try {
+      final produtos = await produtoRepository.buscarTodos();
+      setState(() {
+        listaDeProdutos = produtos;
+      });
+    } catch (exception) {
+      print('Erro ao carregar produtos: $exception');
+    }
+  }
+
+  void _adicionarItem() {
+    if (_produtoSelecionado != null && _quantidadeController.text.isNotEmpty) {
+      final item = ItemPedido(
+        int.parse(_quantidadeController.text),
+        ProdutoPedido(
+          _produtoSelecionado!.id,
+          _produtoSelecionado!.descricao,
+        ),
+      );
+      setState(() {
+        listaItens.add(item);
+        _produtoSelecionado = null;
+        _quantidadeController.clear();
+      });
+    }
+  }
+
+  void _salvarPedido() async {
+    if (_formKey.currentState!.validate()) {
+      final novoPedido = PedidoRequest(_cpfController.text, listaItens);
+      print(novoPedido.toJson());
+      try {
+        PedidoRepository repository = PedidoRepository();
+        final pedidoInserido = await repository.inserir(novoPedido);
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              'Pedido salvo com sucesso! ID: ${pedidoInserido.idPedido}'),
+        ));
+        Navigator.pushReplacementNamed(context, '/pedido/list');
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Erro ao salvar o pedido: $e'),
+          backgroundColor: Colors.red,
+        ));
+      }
+    }
   }
 
   Widget _buildForm(BuildContext context) {
@@ -38,7 +88,6 @@ class _InserirPedidoState extends State<InserirPedidoPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Nome
           TextFormField(
             controller: _cpfController,
             decoration: InputDecoration(labelText: 'CPF'),
@@ -49,48 +98,53 @@ class _InserirPedidoState extends State<InserirPedidoPage> {
               return null;
             },
           ),
-
-          // Espaçamento entre os campos
           SizedBox(height: 16),
-
-          // Sobrenome
-          TextFormField(
-            controller: _itensController,
-            decoration: InputDecoration(labelText: 'Produto'),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Campo não pode ser vazio';
-              }
-              return null;
-            },
+          SingleChildScrollView(
+            child: DropdownButtonFormField<Produto>(
+              isExpanded: true,
+              value: _produtoSelecionado,
+              items: listaDeProdutos.map((produto) {
+                return DropdownMenuItem<Produto>(
+                  value: produto,
+                  child: Text(produto.descricao),
+                );
+              }).toList(),
+              onChanged: (Produto? produto) {
+                setState(() {
+                  _produtoSelecionado = produto;
+                });
+              },
+              decoration: InputDecoration(labelText: 'Selecionar Produto'),
+            ),
           ),
-
-          // Espaçamento entre os campos
           SizedBox(height: 16),
-
-          // CPF
           TextFormField(
-            controller: _quantidadeController,
-            decoration: InputDecoration(labelText: 'Quantidade'),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Campo não pode ser vazio';
-              }
-              return null;
-            },
+              controller: _quantidadeController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Quantidade')
           ),
-
-          // Espaçamento entre os campos
           SizedBox(height: 16),
-
-          // Botão Salvar
           ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _salvar();
-              }
+            onPressed: _adicionarItem,
+            child: Text('Adicionar'),
+          ),
+          SizedBox(height: 16),
+          Text(
+            'Itens do Pedido:',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 8),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: listaItens.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(
+                  '${listaItens[index].produto.descricao} - ${listaItens[index]
+                      .quantidade}',
+                ),
+              );
             },
-            child: Text('Salvar'),
           ),
         ],
       ),
@@ -102,16 +156,36 @@ class _InserirPedidoState extends State<InserirPedidoPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Text("Inserir Pedido"),
+        title: Text('Inserir Pedido'),
       ),
       drawer: AppDrawer(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: _buildForm(context),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(16.0),
+              child: _buildForm(context),
+            ),
+          ),
+          // Adicionando o BottomNavigationBarWidget()
+          BottomAppBar(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: _salvarPedido,
+                    child: Text('Salvar Pedido'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          BottomNavigationBarWidget()
+        ],
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }
