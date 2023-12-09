@@ -50,7 +50,14 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.teal,
           title: Text(widget.title),
         ),
-        body: Center(child: Text("Teste BODY")),
+        // body: Center(child: Image.asset('assets/images/app-master-pedido.png')),
+
+        body: Center(
+            child: SizedBox(
+          width: 240,
+          height: 240,
+          child: Image.asset('assets/images/app-master-pedido.png'),
+        )),
         drawer: AppDrawer(),
         bottomNavigationBar: BottomNavigationBarWidget());
   }
